@@ -57,9 +57,9 @@ const Usuario = sequelize.define('usuario', {
 })
 
     // Para criar uma tabela o banco referente ao modelo
-    Usuario.sync({force: true});
-    Escola.sync({force: true});
-    Colaborador.sync({force: true});
+    // Usuario.sync({force: true});
+    // Escola.sync({force: true});
+    // Colaborador.sync({force: true});
 
         // // Para inserir um registro na tabela
         // Usuario.create({
