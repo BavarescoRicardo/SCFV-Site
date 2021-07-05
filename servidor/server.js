@@ -6,16 +6,14 @@ const server = http.createServer((req, res) =>
 
     switch (req.url) {
         case '/':
-            salario *= 1.15;
+            res.send('<h1>Certo /</h1>')
             break;
         case "supervisor":
-            salario *= 1.10;
+            res.send('<h1>Certo supervisor</h1>')
             break;
         default:
-            salario *= 1.05;
+            res.send('<h1>Certo default</h1>')
     }
-
-    res.end('<h1>Resultado</h1>')
 })
 
 server.listen(3001, 'localhost', () => {
