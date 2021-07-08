@@ -8,9 +8,12 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "expo": "~42.0.0",
     "expo-status-bar": "~1.0.4",
     "express": "^4.17.1",
+    "express-handlebars": "^5.3.2",
+    "handlebars": "^4.7.7",
     "mysql2": "^2.2.5",
     "postgres": "^1.0.2",
     "react": "16.13.1",

@@ -1,5 +1,9 @@
 const express = require('express');
 const server = express();
+const handlebars = require('express-handlebars')
+// variavel cors para acessar servidores remotos
+var cors = require('cors')
+server.use(cors());
 
 // metodo responder ao na url
 server.get('/', function(req, res) {
