@@ -1,95 +1,90 @@
-const Sequelize = require('sequelize')
-const sequelize = new Sequelize('scfv', 'root', 'admin', {
-    host: "localhost",
-    dialect: "mysql"
-})
+const conexao = require('./conexao')
 
 // constantes para os modelos que devem virar tabelas
-const Contato = sequelize.define('contato', {
+const Contato = conexao.sequelize.define('contato', {
     codigo: {
-        type: Sequelize.INTEGER
+        type: conexao.Sequelize.INTEGER
     },
     contato: {
-        type: Sequelize.STRING
+        type: conexao.Sequelize.STRING
     },
     tipo: {
-        type: Sequelize.INTEGER
+        type: conexao.Sequelize.INTEGER
     }
 })
 
-
-const Escola = sequelize.define('escola', {
+const Escola = conexao.sequelize.define('escola', {
     codigo: {
-        type: Sequelize.INTEGER
+        type: conexao.Sequelize.INTEGER
     },
     nome: {
-        type: Sequelize.STRING
+        type: conexao.Sequelize.STRING
     },
     observacao: {
-        type: Sequelize.TEXT
+        type: conexao.Sequelize.TEXT
     }
 })
 
-const Colaborador = sequelize.define('colaborador', {
+const Colaborador = conexao.sequelize.define('colaboradore', {
     codigo: {
-        type: Sequelize.INTEGER
+        type: conexao.Sequelize.INTEGER
     },
     nome: {
-        type: Sequelize.STRING
+        type: conexao.Sequelize.STRING
     },
     bairro: {
-        type: Sequelize.STRING
+        type: conexao.Sequelize.STRING
     },
     datanasc: {
-        type: Sequelize.DATE
+        type: conexao.Sequelize.DATE
     },
     codContato: {
-        type: Sequelize.STRING
+        type: conexao.Sequelize.STRING
     }
 })
 
-const Responsavel = sequelize.define('responsavel', {
+const Responsavel = conexao.sequelize.define('responsavel', {
     codigo: {
-        type: Sequelize.INTEGER
+        type: conexao.Sequelize.INTEGER
     },
     codigoUsuario: {
-        type: Sequelize.INTEGER
+        type: conexao.Sequelize.INTEGER
     },
     nome: {
-        type: Sequelize.STRING
+        type: conexao.Sequelize.STRING
     },
     bairro: {
-        type: Sequelize.STRING
+        type: conexao.Sequelize.STRING
     },
     datanasc: {
-        type: Sequelize.DATE
+        type: conexao.Sequelize.DATE
     },
     codContato: {
-        type: Sequelize.STRING
+        type: conexao.Sequelize.STRING
     }
 })
 
-const Usuario = sequelize.define('usuario', {
+const Usuario = conexao.sequelize.define('usuario', {
     codigo: {
-        type: Sequelize.INTEGER
+        type: conexao.Sequelize.INTEGER
     },
     nome: {
-        type: Sequelize.STRING
+        type: conexao.Sequelize.STRING
     },
     turno: {
-        type: Sequelize.INTEGER
+        type: conexao.Sequelize.INTEGER
     },
     bairro: {
-        type: Sequelize.STRING
+        type: conexao.Sequelize.STRING
     },
     datanasc: {
-        type: Sequelize.DATE
+        type: conexao.Sequelize.DATE
     },
     turma: {
-        type: Sequelize.INTEGER
+        type: conexao.Sequelize.INTEGER
     },
     idescola: {
-        type: Sequelize.INTEGER
+        type: conexao.Sequelize.INTEGER
     }
 })
 
@@ -111,8 +106,9 @@ const Usuario = sequelize.define('usuario', {
         //     idturma: 1,
         // })
 
-// sequelize.authenticate().then(function(){
+// conexao.Sequelize.authenticate().then(function(){
 //     console.log("Conectou ao banco MySql; database: scfv")
 // }).catch(function(erro){
 //     console.log("Erro conectar ao banco MySql; database: scfv")
 // })
+
