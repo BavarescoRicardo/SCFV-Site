@@ -2,6 +2,7 @@ const express = require('express');
 const server = express();
 const handlebars = require('express-handlebars')
 const bodyParser = require('body-parser');
+const Usuario = require('./models/Usuario')
 
 // variavel cors para acessar servidores remotos
 var cors = require('cors')
@@ -38,7 +39,19 @@ server.get('/login/:user', function(req, res) {
 })
 
 server.post('/cadastro', function(req, res) {
-    res.send("<h1>Tentativa de cadastrar usuario o usuario-  " + req.body.user + " - pelo formulario" + "</h1>");
+             Usuario.create({
+             codigo: 1,
+             nome: req.body.user,
+             turno: 1, // 1 equivale a manha e 2 equivale a vespertino
+             bairro: req.body.senha,
+             datanasc: '1997-12-04 00:00:00',
+             idescola: 1,
+             idturma: 1,
+         }).then(function(){
+            res.send("<h1>Tentativa de cadastrar usuario o usuario-  " + req.body.user + " - pelo formulario" + "</h1>")
+         }).catch(function(erro){
+             res.send("Ocorreu um erro " + erro)
+         })
 })
 
 
