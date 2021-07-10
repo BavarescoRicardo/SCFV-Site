@@ -78,7 +78,6 @@ server.post('/cadastrousuario', function(req, res) {
 
 server.get('/usuariolista', function(req, res) {
     Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
-        console.log(posts)
         res.render('listausuarios', {posts: posts})
     })
     
