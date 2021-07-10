@@ -1,0 +1,11 @@
+<h1>Lista de usuarios</h1>
+
+{{#each posts}}
+   <h1>{{dataValues.nome}}</h1>
+    <p>{{dataValues.bairro}}</p>
+    <hr>
+{{/each}}
+<div>
+    <p>Cadastro</p>    
+    <a href="/cadastrousuario"><button type="submit">Cadastrar usuario</button>
+</div>

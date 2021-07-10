@@ -1,14 +1,17 @@
 const conexao = require('./conexao')
 
 // constantes para os modelos que devem virar tabelas
-const Escola = conexao.sequelize.define('escola', {
+const Login = conexao.sequelize.define('login', {
     codigo: {
         type: conexao.Sequelize.INTEGER
     },
     nome: {
         type: conexao.Sequelize.STRING
     },
-    observacao: {
-        type: conexao.Sequelize.TEXT
+    senha: {
+        type: conexao.Sequelize.STRING
     }
 })
+
+module.exports = Login
+// Login.sync({force: true});

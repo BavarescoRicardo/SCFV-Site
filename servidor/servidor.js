@@ -3,6 +3,8 @@ const server = express();
 const handlebars = require('express-handlebars')
 const bodyParser = require('body-parser');
 const Usuario = require('./models/Usuario')
+const Escola = require('./models/Escola')
+const Login = require('./models/Login')
 
 // variavel cors para acessar servidores remotos
 var cors = require('cors')
@@ -21,8 +23,13 @@ server.use(cors());
 
 // metodo responder ao na url
 server.get('/', function(req, res) {
-    //res.send('<h1>Requisição get  -  Certo</h1>');
+    // res.send('<h1>Requisição get  -  Certo</h1>');    
     res.render('formulario')
+})
+
+server.get('/cadastrousuario', function(req, res) {
+    // res.send('<h1>Requisição get  -  Certo</h1>');    
+    res.render('cadastrousuario')
 })
 
         // server.get('/usuarios', function(req, res) {
@@ -38,22 +45,44 @@ server.get('/login/:user', function(req, res) {
     res.send("<h1>Tentativa de logar com o usuario:  " + req.params.user+"</h1>");
 })
 
-server.post('/cadastro', function(req, res) {
-             Usuario.create({
+server.post('/cadastro', function(req, res) {             
+    Login.create({
              codigo: 1,
              nome: req.body.user,
-             turno: 1, // 1 equivale a manha e 2 equivale a vespertino
-             bairro: req.body.senha,
-             datanasc: '1997-12-04 00:00:00',
-             idescola: 1,
-             idturma: 1,
+             senha: req.body.senha
          }).then(function(){
-            res.send("<h1>Tentativa de cadastrar usuario o usuario-  " + req.body.user + " - pelo formulario" + "</h1>")
+//            res.send("<h1>Tentativa de cadastrar usuario o usuario-  " + req.body.user + " - pelo formulario" + "</h1>")
+            res.redirect('/usuariolista');
          }).catch(function(erro){
              res.send("Ocorreu um erro " + erro)
          })
 })
 
+server.post('/cadastrousuario', function(req, res) {             
+    Usuario.create({            
+             // Cadastro novo usuario
+             codigo: 1,
+            nome: req.body.nome,
+            turno: 1,
+            bairro: req.body.nome,
+            datanasc: req.body.nasc,
+            turma: req.body.turma,
+            idescola: req.body.escola
+         }).then(function(){
+            res.redirect('/usuariolista');
+         }).catch(function(erro){
+             res.send("Ocorreu um erro " + erro)
+         })
+})
+
+
+server.get('/usuariolista', function(req, res) {
+    Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
+        console.log(posts)
+        res.render('listausuarios', {posts: posts})
+    })
+    
+})
 
 server.listen(8081, function() {
     console.log('Aceeso em: http://localhost:8081');
