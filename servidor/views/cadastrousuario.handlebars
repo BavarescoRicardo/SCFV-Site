@@ -1,5 +1,5 @@
 <form  action="/cadastrousuario" method="POST">
-    <p>Nome meliante</p>
+    <p>Nome do usuario</p>
     <input type="text" name="nome">
     <p>Bairro</p>
     <input type="text" name="bairro">
@@ -10,8 +10,14 @@
     <p>Turma</p>
     <input type="number" name="turma">
     <p>Escola</p>
-    <input type="number" name="escola">
+    <select id="escola" name="cmbEscola">
+        <option value="1"></option>
+        <option value="2">Dom Felicio</option>
+        <option value="3">Isabel Telles</option>
+        <option value="4">Sebastião</option>
+        <option value="5">Santo Antonio</option>
+    </select>
 
 
-    <button type="submit">Cadastrar</button>
+    <button type="submit">Cadastrar usuario</button>
 </form>

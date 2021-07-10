@@ -64,10 +64,10 @@ server.post('/cadastrousuario', function(req, res) {
              codigo: 1,
             nome: req.body.nome,
             turno: 1,
-            bairro: req.body.nome,
+            bairro: req.body.bairro,
             datanasc: req.body.nasc,
             turma: req.body.turma,
-            idescola: req.body.escola
+            idescola: req.body.cmbEscola            
          }).then(function(){
             res.redirect('/usuariolista');
          }).catch(function(erro){
