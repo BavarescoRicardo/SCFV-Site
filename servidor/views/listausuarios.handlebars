@@ -1,11 +1,21 @@
-<h1>Lista de usuarios</h1>
-
-{{#each posts}}
-   <h1>{{dataValues.nome}}</h1>
-    <p>{{dataValues.bairro}}</p>
+<div class="container">
+    <h2>Lista de usuarios</h2>      
     <hr>
-{{/each}}
-<div>
-    <p>Cadastro</p>    
+    <br/>
+    {{#each posts}}
+    <div class="row">
+        <h4>Nome: {{dataValues.nome}}</h4>
+        <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}} Bairro: {{dataValues.bairro}}</h5>
+        <a href= "/deletar/{{id}}{{dataValues.id}}"><button>Deletar</button></a>
+    
+    <hr>
+    </div>
+    {{/each}}
+</div>
+
+<div class="md-5">
+    <br>
+    <hr>
+    <p>Cadastro novo</p>    
     <a href="/cadastrousuario"><button type="submit">Cadastrar usuario</button>
 </div>

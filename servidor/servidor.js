@@ -7,7 +7,7 @@ const Escola = require('./models/Escola')
 const Login = require('./models/Login')
 
 // variavel cors para acessar servidores remotos
-var cors = require('cors')
+var cors = require('cors');
 server.use(cors());
 
 // Configurar
@@ -20,11 +20,10 @@ server.use(cors());
     server.use(bodyParser.json())
 
 //  Definir rotas
-
 // metodo responder ao na url
 server.get('/', function(req, res) {
     // res.send('<h1>Requisição get  -  Certo</h1>');    
-    res.render('formulario')
+    res.render('login')
 })
 
 server.get('/cadastrousuario', function(req, res) {
@@ -43,6 +42,11 @@ server.get('/sobre', function(req, res) {
 
 server.get('/login/:user', function(req, res) {
     res.send("<h1>Tentativa de logar com o usuario:  " + req.params.user+"</h1>");
+    Usuario.destroy({where: {'id' : req.params.id}}).then(function(){
+        console.log("Registro apagado com sucessor");
+    }).catch(function(erro){
+        console.log("Item nao encontrado "+ erro)
+    })
 })
 
 server.post('/cadastro', function(req, res) {             
@@ -51,7 +55,7 @@ server.post('/cadastro', function(req, res) {
              nome: req.body.user,
              senha: req.body.senha
          }).then(function(){
-//            res.send("<h1>Tentativa de cadastrar usuario o usuario-  " + req.body.user + " - pelo formulario" + "</h1>")
+//            res.send("<h1>Tentativa de cadastrar usuario o usuario-  " + req.body.user + " - pelo login" + "</h1>")
             res.redirect('/usuariolista');
          }).catch(function(erro){
              res.send("Ocorreu um erro " + erro)
