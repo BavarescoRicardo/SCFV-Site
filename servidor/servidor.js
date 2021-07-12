@@ -44,7 +44,23 @@ server.get('/sobre', function(req, res) {
     res.send('<h1>Requisição get - sobre  -  Certo</h1>');
 })
 
-server.get('/login/:user', function(req, res) {
+server.post('/logar', function(req, res) {
+    Login.findAll({ 
+        where: {
+            nome: req.body.user, senha: req.body.senha
+        },
+        raw : true // <----------- Magic is here
+    }).then(function (sensors) {   
+        notes => res.json(notes)     
+//        if(notes) throw error;
+        // console.log(sensors)
+        res.send("<h1>Usuario-  " + req.body.user + " - login okei </h1>")
+    }).catch(function(erro){
+        res.send("<h1>Algo errado no login:  " + req.body.user + "</h1>")
+    })
+})
+
+server.get('/apagar/:user', function(req, res) {    
     res.send("<h1>Tentativa de logar com o usuario:  " + req.params.user+"</h1>");
     Usuario.destroy({where: {'id' : req.params.id}}).then(function(){
         console.log("Registro apagado com sucessor");
@@ -58,8 +74,7 @@ server.post('/cadastro', function(req, res) {
              codigo: 1,
              nome: req.body.user,
              senha: req.body.senha
-         }).then(function(){
-//            res.send("<h1>Tentativa de cadastrar usuario o usuario-  " + req.body.user + " - pelo login" + "</h1>")
+         }).then(function(){            
             res.redirect('/usuariolista');
          }).catch(function(erro){
              res.send("Ocorreu um erro " + erro)
