@@ -1,0 +1,27 @@
+<div class="container">
+    <p>Dia da oficina</p>
+    <input id="date" type="date" name="nasc"/>
+    <p>Oficina:</p>
+    <select id="oficina" name="cmbOficina">
+        <option value='1'>Manutino</option>
+        <option value='2'>Vespertino</option>
+    </select>
+    <br>
+    <br>
+    <h2>Lista de usuarios</h2>          
+    <hr>
+    <br/>
+    {{#each posts}}
+    <div class="row">
+        <h4>Nome: {{dataValues.nome}}</h4>
+        <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}} Bairro: {{dataValues.bairro}}</h5>
+        <a href= "/presenca/{{id}}{{dataValues.id}}"><button>Presente</button></a>
+    
+    <hr>
+    </div>
+    {{/each}}
+</div>
+
+<div class="md-5">
+
+</div>

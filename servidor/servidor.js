@@ -86,7 +86,7 @@ server.post('/cadastrousuario', function(req, res) {
              // Cadastro novo usuario
              codigo: 1,
             nome: req.body.nome,
-            turno: req.body.turno,
+            turno: req.body.cmbTurno,
             bairro: req.body.bairro,
             datanasc: req.body.nasc,
             turma: req.body.turma,
@@ -102,6 +102,13 @@ server.post('/cadastrousuario', function(req, res) {
 server.get('/usuariolista', function(req, res) {
     Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
         res.render('listausuarios', {posts: posts})
+    })
+    
+})
+
+server.get('/darpresenca', function(req, res) {
+    Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
+        res.render('presenca', {posts: posts})
     })
     
 })
