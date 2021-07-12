@@ -1,6 +1,10 @@
 const express = require('express');
 const server = express();
 const handlebars = require('express-handlebars')
+// constante caminho
+const path = require("path")
+server.use(express.static(path.join(__dirname, "public"))) 
+
 const bodyParser = require('body-parser');
 const Usuario = require('./models/Usuario')
 const Escola = require('./models/Escola')
