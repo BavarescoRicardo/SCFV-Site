@@ -86,7 +86,7 @@ server.post('/cadastrousuario', function(req, res) {
              // Cadastro novo usuario
              codigo: 1,
             nome: req.body.nome,
-            turno: 1,
+            turno: req.body.turno,
             bairro: req.body.bairro,
             datanasc: req.body.nasc,
             turma: req.body.turma,
