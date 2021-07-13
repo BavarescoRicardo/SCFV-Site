@@ -8,3 +8,10 @@ body {
 #loginestilo {
     margin-top: 5%;
 }
+
+#filtroslista {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-bottom: 5%;
+    display: inline-block;
+}

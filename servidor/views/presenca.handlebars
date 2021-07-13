@@ -1,11 +1,50 @@
+<div id="">
+    <h2>Presenças e faltas</h2>
+    <div style="float:left;">
+        <p>Dia da oficina</p>
+    </div>
+    <div style="float:left; margin-left: 2%;">    
+        <input id="date" type="date" name="nasc"/>
+    </div>
+    <div style="float:left; margin-right: 2%; margin-left: 2%;">
+        <p>Oficina:</p>
+    </div>
+    <div style="margin-left: 2%;">
+        <select id="oficina" name="cmbOficina">
+            <option value='1'>Informatica</option>
+            <option value='2'>Esporte</option>
+            <option value='3'>Meio Ambiente</option>
+            <option value='4'>Artesanato</option>
+            <option value='5'>Capoeira</option>
+        </select>
+    </div>
+</div>
+
+<br>
+    <div style="float:left; margin-right: 2%;">
+        <p>Turma:</p>
+    </div>
+    <div style="float:left; margin-left: 2%;">
+        <select id="Turma" name="cmbTurma">
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+            <option value='4'>4</option>
+        </select>
+    </div>
+    <div style="float:left; margin-left: 2%;">
+        <p>Turno</p>
+    </div>
+
+    <div style="float:left; margin-left: 2%;">
+        <select id="turno" name="cmbTurno">
+            <option value='1'>Matutino</option>
+            <option value='2'>Vespertino</option>
+        </select>
+    </div>
+
+<br>
 <div class="container">
-    <p>Dia da oficina</p>
-    <input id="date" type="date" name="nasc"/>
-    <p>Oficina:</p>
-    <select id="oficina" name="cmbOficina">
-        <option value='1'>Manutino</option>
-        <option value='2'>Vespertino</option>
-    </select>
     <br>
     <br>
     <h2>Lista de usuarios</h2>          
@@ -15,9 +54,8 @@
     <div class="row">
         <h4>Nome: {{dataValues.nome}}</h4>
         <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}} Bairro: {{dataValues.bairro}}</h5>
-        <a href= "/presenca/{{id}}{{dataValues.id}}"><button>Presente</button></a>
-    
-    <hr>
+        <a href= "/presenca/{{id}}{{dataValues.id}}"><button>Presente</button></a>    
+        <hr>
     </div>
     {{/each}}
 </div>
