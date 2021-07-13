@@ -1,7 +1,7 @@
 const conexao = require('./conexao')
 
 // constantes para os modelos que devem virar tabelas
-const Presenca = conexao.sequelize.define('contato', {
+const Presenca = conexao.sequelize.define('presenca', {
     codigo: {
         type: conexao.Sequelize.INTEGER
     },

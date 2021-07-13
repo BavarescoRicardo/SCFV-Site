@@ -9,6 +9,9 @@ const bodyParser = require('body-parser');
 const Usuario = require('./models/Usuario')
 const Escola = require('./models/Escola')
 const Login = require('./models/Login')
+const Contato = require('./models/Contato')
+const Presenca = require('./models/Presenca')
+const UsuarioPresenca = require('./models/UsuarioPresenca')
 
 // variavel cors para acessar servidores remotos
 var cors = require('cors');

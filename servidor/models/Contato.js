@@ -12,3 +12,7 @@ const Contato = conexao.sequelize.define('contato', {
         type: conexao.Sequelize.INTEGER
     }
 })
+
+// Contato.sync({force: true});
+
+module.exports = Contato
