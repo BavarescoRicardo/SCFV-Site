@@ -63,12 +63,12 @@ server.post('/logar', function(req, res) {
     })
 })
 
-server.get('/apagar/:user', function(req, res) {    
-    res.send("<h1>Tentativa de logar com o usuario:  " + req.params.user+"</h1>");
-    Usuario.destroy({where: {'id' : req.params.id}}).then(function(){
+server.get('/deletar/:user', function(req, res) {        
+    Usuario.destroy({where: {'id' : req.params.user}}).then(function(){
+        res.send("<h1>Tentativa de apagar o usuario:  " + req.params.user+"</h1>");
         console.log("Registro apagado com sucessor");
     }).catch(function(erro){
-        console.log("Item nao encontrado "+ erro)
+        console.log("Item nao encontrado " +req.params.user + " " + erro)
     })
 })
 
