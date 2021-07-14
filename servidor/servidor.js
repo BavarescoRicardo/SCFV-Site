@@ -55,7 +55,6 @@ server.post('/logar', function(req, res) {
         raw : true 
     }).then(function (sensors) {
         user =>  res.json(sensors) 
-        // console.log(user.id)           
         if(sensors.length === 0) throw error;
         console.log(sensors.length === 0); // false
         console.log(sensors)
