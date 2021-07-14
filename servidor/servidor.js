@@ -52,14 +52,16 @@ server.post('/logar', function(req, res) {
         where: {
             nome: req.body.user, senha: req.body.senha
         },
-        raw : true // <----------- Magic is here
-    }).then(function (sensors) {   
-        notes => res.json(notes)     
-//        if(notes) throw error;
-        // console.log(sensors)
-        res.send("<h1>Usuario-  " + req.body.user + " - login okei </h1>")
+        raw : true 
+    }).then(function (sensors) {
+        user =>  res.json(sensors) 
+        // console.log(user.id)           
+        if(sensors.length === 0) throw error;
+        console.log(sensors.length === 0); // false
+        console.log(sensors)
+        res.send("<h1>Logado: -  " + req.body.nome +" " + " okei </h1>")
     }).catch(function(erro){
-        res.send("<h1>Algo errado no login:  " + req.body.user + "</h1>")
+        res.send("<h1>Algo errado no login:  " + erro + "</h1>")
     })
 })
 
