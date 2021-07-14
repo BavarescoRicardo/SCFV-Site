@@ -26,3 +26,23 @@
         <button type="submit">Cadastrar usuario</button>
     </form>
 </div>
+
+<script>
+    function excluirItemSelecionado(){
+        var itens = document.getElementById("itens");
+        if (itens.selectedIndex == -1){
+            alert("Selecione um item na lista!");
+            return;
+        }
+        var indice = itens.options[itens.selectedIndex].index;
+        var itemSelecionado = itens.options[itens.selectedIndex].text;
+        var resultado = confirm("Deseja excluir o item: " + itemSelecionado + " ?");
+        if (resultado == true) {
+            itens.removeChild(itens[indice]);
+            alert("O item " + itemSelecionado + " será excluído da lista!");    
+        }
+        else{
+            alert("Você desistiu de excluir o item " + itemSelecionado + " da lista!");
+        }
+    }
+</script>
