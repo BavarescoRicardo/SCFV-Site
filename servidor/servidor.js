@@ -59,9 +59,11 @@ server.post('/logar', function(req, res) {
         if(sensors.length === 0) throw error;
         console.log(sensors.length === 0); // false
         console.log(sensors)
-        res.send("<h1>Logado: -  " + req.body.nome +" " + " okei </h1>")
+//        alert('okei')
+        res.redirect('/usuariolista');
     }).catch(function(erro){
-        res.send("<h1>Algo errado no login:  " + erro + "</h1>")
+//        alert('erro')
+        res.render('login_error');
     })
 })
 
