@@ -1,10 +1,10 @@
-<div id="">
-    <h2>Presenças e faltas</h2>
+<h2>Presenças e faltas</h2>
+<form  action="/darpresenca" method="POST">
     <div style="float:left;">
         <p>Dia da oficina</p>
-    </div>
+    </div>    
     <div style="float:left; margin-left: 2%;">    
-        <input id="date" type="date" name="nasc"/>
+        <input id="date" type="date" name="diaoficina"/>
     </div>
     <div style="float:left; margin-right: 2%; margin-left: 2%;">
         <p>Oficina:</p>
@@ -18,7 +18,6 @@
             <option value='5'>Capoeira</option>
         </select>
     </div>
-</div>
 
 <br>
     <div style="float:left; margin-right: 2%;">
@@ -43,23 +42,24 @@
         </select>
     </div>
 
-<br>
-<div class="container">
     <br>
-    <br>
-    <h2>Lista de usuarios</h2>          
-    <hr>
-    <br/>
-    {{#each posts}}
-    <div class="row">
-        <h4>Nome: {{dataValues.nome}}</h4>
-        <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}} Bairro: {{dataValues.bairro}}</h5>
-        <a href= "/presenca/{{id}}{{dataValues.id}}"><button>Presente</button></a>    
+    <div class="container">
+        <br>
+        <br>
+        <h2>Lista de usuarios</h2>          
         <hr>
+        <br/>
+        {{#each posts}}
+        <div class="row">
+            <h4>Nome: {{dataValues.nome}}</h4>
+            <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}} Bairro: {{dataValues.bairro}}</h5>
+            <a href= "/presenca/{{id}}{{dataValues.id}}"><button>Presente</button></a>    
+            <hr>
+        </div>
+        {{/each}}
     </div>
-    {{/each}}
-</div>
 
-<div class="md-5">
-
-</div>
+    <div style="float:left; margin-left: 3%;">
+        <button type="submit">Nova chamada</button>
+    </div>
+</form>

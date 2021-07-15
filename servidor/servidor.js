@@ -1,6 +1,23 @@
 const express = require('express');
 const server = express();
 const handlebars = require('express-handlebars')
+// Sessao
+const session = require("express-session")
+const flash = require("connect-flash")
+//Configurar sessao
+server.use(session({
+    secret: "scfvpacai",
+    resave: true,
+    saveUninitialized: true
+}))
+server.use(flash())
+
+        // // Middleware
+        // server.use((req, res, next) => {
+        //     res.locals.success_msg = req.flash("success_msg")
+        //     res.locals.error_msg = req.flash("error_msg")
+        // })
+
 // constante caminho
 const path = require("path")
 server.use(express.static(path.join(__dirname, "public"))) 
@@ -112,7 +129,23 @@ server.get('/usuariolista', function(req, res) {
     
 })
 
-server.get('/darpresenca', function(req, res) {
+server.post('/darpresenca', function(req, res) {
+    Presenca.create({            
+        // Cadastro novo usuario
+       codigo: 1,
+       dia: req.body.diaoficina,
+       turma: req.body.cmbTurma,
+       oficina: req.body.cmbOficina,
+       turno: req.body.cmbTurno
+    }).then(function(){
+//       res.redirect('/usuariolista');
+    }).catch(function(erro){
+        res.send("Ocorreu um erro " + erro)
+    })
+    
+})
+
+server.get('/listapresenca', function(req, res) {
     Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
         res.render('presenca', {posts: posts})
     })
