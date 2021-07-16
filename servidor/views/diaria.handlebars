@@ -1,5 +1,5 @@
-<h2>Presenças e faltas</h2>
-<form  action="/novachamada" method="POST">
+<h2>Diaria e conteudos</h2>
+<form  action="/novodiario" method="POST">
     <div style="float:left;">
         <p>Dia da oficina</p>
     </div>    
@@ -41,10 +41,16 @@
             <option value='2'>Vespertino</option>
         </select>
     </div>
-
+    <br>
+    <div id="loginestilo">
+        <label for="fname">Conteúdo</label>
+        <input type="text" id="fname" name="conteudo"> 
+        <label for="fname">Observação</label>
+        <input type="text" id="fname" name="obs">
+    </div>
     <br>
 
-    <div style="float:left; margin-left: 5%;">
-        <button type="submit">Nova chamada</button>
+    <div style="float:left; margin-left: 3%;">
+        <button type="submit">Nova diario de classe</button>
     </div>
 </form>

@@ -1,0 +1,23 @@
+<h2>Presenças e faltas</h2>
+<form  action="/darpresenca" method="POST">
+    <br>
+    <div class="container">
+        <br>
+        <br>
+        <h2>Lista de usuarios</h2>          
+        <hr>
+        <br/>
+        {{#each posts}}
+        <div class="row">
+            <h4>Nome: {{dataValues.nome}}</h4>
+            <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}} Bairro: {{dataValues.bairro}}</h5>
+            <a href= "/presenca/{{id}}{{dataValues.id}}"><button>Presente</button></a>    
+            <hr>
+        </div>
+        {{/each}}
+    </div>
+
+    <div style="float:left; margin-left: 3%;">
+        <button type="submit">Nova chamada</button>
+    </div>
+</form>

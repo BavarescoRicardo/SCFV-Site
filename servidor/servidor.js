@@ -23,10 +23,13 @@ const path = require("path")
 server.use(express.static(path.join(__dirname, "public"))) 
 
 const bodyParser = require('body-parser');
+
+// Modelos
 const Usuario = require('./models/Usuario')
 const Escola = require('./models/Escola')
 const Login = require('./models/Login')
 const Contato = require('./models/Contato')
+const Diaria = require('./models/Diaria')
 const Presenca = require('./models/Presenca')
 const UsuarioPresenca = require('./models/UsuarioPresenca')
 
@@ -127,6 +130,54 @@ server.get('/usuariolista', function(req, res) {
         res.render('listausuarios', {posts: posts})
     })
     
+})
+
+// Rota do servidor para criar novo diario de classe // postar conteudos
+
+server.get('/diariocnteudo', function(req, res) {
+    // res.send('<h1>Requisição get  -  Certo</h1>');    
+    res.render('diaria')
+})
+
+
+server.post('/novodiario', function(req, res) {
+    Diaria.create({            
+        // Cadastro novo usuario
+       codigo: 1,
+       dia: req.body.diaoficina,
+       turma: req.body.cmbTurma,
+       oficina: req.body.cmbOficina,
+       turno: req.body.cmbTurno,
+       conteudo: req.body.conteudo,
+       observacao: req.body.obs
+    }).then(function(){
+//       res.redirect('/usuariolista');
+        Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
+        res.render('listausuarios', {posts: posts})
+        })
+    }).catch(function(erro){
+        res.send("Ocorreu um erro " + erro)
+    })
+})
+
+server.post('/novachamada', function(req, res) {
+    Presenca.create({            
+        // Cadastro novo usuario
+       codigo: 1,
+       dia: req.body.diaoficina,
+       turma: req.body.cmbTurma,
+       oficina: req.body.cmbOficina,
+       turno: req.body.cmbTurno
+    }).then(function(posts){
+        Usuario.findAll({ 
+            where: {
+                turma: 4
+            },
+            raw : true })
+        res.render('presencaUsuarios', {posts: posts});        
+    }).catch(function(erro){
+        res.send("Ocorreu um erro " + erro)
+    })
 })
 
 server.post('/darpresenca', function(req, res) {
