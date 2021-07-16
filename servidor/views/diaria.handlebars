@@ -1,56 +1,59 @@
-<h2>Diaria e conteudos</h2>
-<form  action="/novodiario" method="POST">
-    <div style="float:left;">
-        <p>Dia da oficina</p>
-    </div>    
-    <div style="float:left; margin-left: 2%;">    
-        <input id="date" type="date" name="diaoficina"/>
-    </div>
-    <div style="float:left; margin-right: 2%; margin-left: 2%;">
-        <p>Oficina:</p>
-    </div>
-    <div style="margin-left: 2%;">
-        <select id="oficina" name="cmbOficina">
-            <option value='1'>Informatica</option>
-            <option value='2'>Esporte</option>
-            <option value='3'>Meio Ambiente</option>
-            <option value='4'>Artesanato</option>
-            <option value='5'>Capoeira</option>
-        </select>
-    </div>
 
-<br>
-    <div style="float:left; margin-right: 2%;">
-        <p>Turma:</p>
-    </div>
-    <div style="float:left; margin-left: 2%;">
-        <select id="Turma" name="cmbTurma">
-            <option value='1'>1</option>
-            <option value='2'>2</option>
-            <option value='3'>3</option>
-            <option value='4'>4</option>
-        </select>
-    </div>
-    <div style="float:left; margin-left: 2%;">
-        <p>Turno</p>
-    </div>
-
-    <div style="float:left; margin-left: 2%;">
-        <select id="turno" name="cmbTurno">
-            <option value='1'>Matutino</option>
-            <option value='2'>Vespertino</option>
-        </select>
-    </div>
+<div class="container">
+    <h2>Diaria e conteudos</h2>
+    <form  action="/novodiario" method="POST">       
+        <div class="row">
+            <div class="col-3">
+                <p>Dia da oficina</p>                    
+                <input id="date" type="date" name="diaoficina"/>
+            </div>    
+            <div class="col-3">
+                <p>Oficina:</p>
+                <select id="oficina" name="cmbOficina">
+                    <option value='1'>Informatica</option>
+                    <option value='2'>Esporte</option>
+                    <option value='3'>Meio Ambiente</option>
+                    <option value='4'>Artesanato</option>
+                    <option value='5'>Capoeira</option>
+                </select>
+            </div>
+        </div>
     <br>
-    <div id="loginestilo">
-        <label for="fname">Conteúdo</label>
-        <input type="text" id="fname" name="conteudo"> 
-        <label for="fname">Observação</label>
-        <input type="text" id="fname" name="obs">
+    <div class="row">
+        <div class="col-3">
+            <p>Turma:</p>        
+            <select id="Turma" name="cmbTurma">
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+            </select>
+        </div>
+        <div class="col-3">
+            <p>Turno</p>      
+            <select id="turno" name="cmbTurno">
+                <option value='1'>Matutino</option>
+                <option value='2'>Vespertino</option>
+            </select>
+        </div>
     </div>
-    <br>
+        <br>
+    <div class="row">
+        <div class="col-3">
+            <label for="fname">Conteúdo</label>
+            <input type="text" id="fname" name="conteudo"> 
+        </div>
 
-    <div style="float:left; margin-left: 3%;">
-        <button type="submit">Nova diario de classe</button>
+        <div class="col-3">
+            <label for="fname">Observação</label>
+            <input type="text" id="fname" name="obs">
+        </div>
     </div>
-</form>
+        
+        <br>
+
+        <div style="float:left; margin-left: 3%;">
+            <button type="submit">Nova diario de classe</button>
+        </div>
+    </form>
+</div>

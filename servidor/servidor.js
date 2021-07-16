@@ -171,7 +171,7 @@ server.post('/novachamada', function(req, res) {
     }).then(function(posts){
         Usuario.findAll({ 
             where: {
-                turma: 4
+                turma: req.body.cmbTurma
             },
             raw : true })
         res.render('presencaUsuarios', {posts: posts});        
