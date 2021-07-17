@@ -153,7 +153,7 @@ server.post('/novodiario', function(req, res) {
     }).then(function(){
 //       res.redirect('/usuariolista');
         Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
-            res.render('listausuarios', {posts: posts})
+            res.render('listaDiaria', {posts: posts})
         })
     }).catch(function(erro){
         res.send("Ocorreu um erro " + erro)
