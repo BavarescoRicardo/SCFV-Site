@@ -54,7 +54,7 @@ server.get('/', function(req, res) {
 })
 
 server.get('/cadastrousuario', function(req, res) {
-    // res.send('<h1>Requisição get  -  Certo</h1>');    
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     res.render('cadastrousuario')
 })
 
@@ -75,13 +75,12 @@ server.post('/logar', function(req, res) {
         raw : true 
     }).then(function (sensors) {
         user =>  res.json(sensors) 
-        if(sensors.length === 0) throw error;
-        console.log(sensors.length === 0); // false
-        console.log(sensors)
-//        alert('okei')
+        if(sensors.length === 0) throw error;        
+        req.session.login = req.body.user
+
         res.redirect('/usuariolista');
     }).catch(function(erro){
-//        alert('erro')
+        req.session.login = null
         res.render('login_error');
     })
 })
@@ -96,6 +95,7 @@ server.get('/deletar/:user', function(req, res) {
 })
 
 server.post('/cadastro', function(req, res) {             
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     Login.create({
              codigo: 1,
              nome: req.body.user,
@@ -108,6 +108,7 @@ server.post('/cadastro', function(req, res) {
 })
 
 server.post('/cadastrousuario', function(req, res) {             
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     Usuario.create({            
              // Cadastro novo usuario
              codigo: 1,
@@ -126,6 +127,7 @@ server.post('/cadastrousuario', function(req, res) {
 
 
 server.get('/usuariolista', function(req, res) {
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
         res.render('listausuarios', {posts: posts})
     })
@@ -135,7 +137,7 @@ server.get('/usuariolista', function(req, res) {
 // Rota do servidor para criar novo diario de classe // postar conteudos
 
 server.get('/diariocnteudo', function(req, res) {
-    // res.send('<h1>Requisição get  -  Certo</h1>');    
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     res.render('diaria')
 })
 
@@ -161,14 +163,14 @@ server.post('/novodiario', function(req, res) {
 })
 
 server.post('/novachamada', function(req, res) {
-    // Presenca.create({            
-    //     // Cadastro novo usuario
-    //    codigo: 1,
-    //    dia: req.body.diaoficina,
-    //    turma: req.body.cmbTurma,
-    //    oficina: req.body.cmbOficina,
-    //    turno: req.body.cmbTurno
-    // })
+    Presenca.create({            
+        // Cadastro novo usuario
+       codigo: 1,
+       dia: req.body.diaoficina,
+       turma: req.body.cmbTurma,
+       oficina: req.body.cmbOficina,
+       turno: req.body.cmbTurno
+    })
     Usuario.findAll({ 
         where: {
             turma: req.body.cmbTurma
@@ -200,13 +202,15 @@ server.post('/darpresenca', function(req, res) {
 })
 
 server.get('/listapresenca', function(req, res) {
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
         res.render('presenca', {posts: posts})
     })    
 })
 
 server.get('/listardiario', function(req, res) {
-    Diaria.findAll({order: [['dia', 'ASC']]}).then(function(posts){
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
+    Diaria.findAll({order: [['dia', 'DESC']]}).then(function(posts){
         res.render('listaDiaria', {posts: posts})
     })    
 })
