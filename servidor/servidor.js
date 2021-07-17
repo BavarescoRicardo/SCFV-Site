@@ -1,9 +1,12 @@
 const express = require('express');
 const server = express();
 const handlebars = require('express-handlebars')
+var moment = require('moment');  
+
 // Sessao
 const session = require("express-session")
 const flash = require("connect-flash")
+
 //Configurar sessao
 server.use(session({
     secret: "scfvpacai",
@@ -210,7 +213,17 @@ server.get('/listapresenca', function(req, res) {
 
 server.get('/listardiario', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
-    Diaria.findAll({order: [['dia', 'DESC']]}).then(function(posts){
+    Diaria.findAll({        
+        attributes: [
+            'id',
+            'conteudo',
+            'turma',
+            'turno',
+            [Diaria.sequelize.fn('date_format', Diaria.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
+        ],
+        order: [['dia', 'DESC'], ['turno', 'ASC']]
+    })
+        .then(function(posts){
         res.render('listaDiaria', {posts: posts})
     })    
 })
