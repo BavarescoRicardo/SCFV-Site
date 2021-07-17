@@ -9,11 +9,17 @@
         <br/>
         {{#each posts}}
         <div class="row">
-            <h4>Nome: {{dataValues.nome}}</h4>
-            <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}} Bairro: {{dataValues.bairro}}</h5>
-            <a href= "/presenca/{{id}}{{dataValues.id}}"><button>Presente</button></a>    
-            <hr>
-        </div>
+            <h4>Nome: {{nome}}</h4>
+            <h5>Turno: {{turno}} Turma: {{turma}} Bairro: {{bairro}}</h5>
+{{!-- //            <a href= "/presenca/{{id}}"><button>Presente</button></a> --}}
+            <div class="col-3">
+                    <h4>Presença</h4>
+            </div>
+            <div class="col-3">
+                <input type="checkbox" name="celcius" id={{id}} checked="true">    
+            </div>
+            </div>
+            <hr>        
         {{/each}}
     </div>
 

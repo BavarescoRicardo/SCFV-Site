@@ -153,7 +153,7 @@ server.post('/novodiario', function(req, res) {
     }).then(function(){
 //       res.redirect('/usuariolista');
         Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
-        res.render('listausuarios', {posts: posts})
+            res.render('listausuarios', {posts: posts})
         })
     }).catch(function(erro){
         res.send("Ocorreu um erro " + erro)
@@ -161,19 +161,22 @@ server.post('/novodiario', function(req, res) {
 })
 
 server.post('/novachamada', function(req, res) {
-    Presenca.create({            
-        // Cadastro novo usuario
-       codigo: 1,
-       dia: req.body.diaoficina,
-       turma: req.body.cmbTurma,
-       oficina: req.body.cmbOficina,
-       turno: req.body.cmbTurno
+    // Presenca.create({            
+    //     // Cadastro novo usuario
+    //    codigo: 1,
+    //    dia: req.body.diaoficina,
+    //    turma: req.body.cmbTurma,
+    //    oficina: req.body.cmbOficina,
+    //    turno: req.body.cmbTurno
+    // })
+    Usuario.findAll({ 
+        where: {
+            turma: req.body.cmbTurma
+        },
+        raw : true 
     }).then(function(posts){
-        Usuario.findAll({ 
-            where: {
-                turma: req.body.cmbTurma
-            },
-            raw : true })
+        user =>  res.json(posts) 
+        console.log("Lista de usuarios filtrados na turma " + req.body.cmbTurma + " " + posts)
         res.render('presencaUsuarios', {posts: posts});        
     }).catch(function(erro){
         res.send("Ocorreu um erro " + erro)
@@ -199,8 +202,13 @@ server.post('/darpresenca', function(req, res) {
 server.get('/listapresenca', function(req, res) {
     Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
         res.render('presenca', {posts: posts})
-    })
-    
+    })    
+})
+
+server.get('/listardiario', function(req, res) {
+    Diaria.findAll({order: [['dia', 'ASC']]}).then(function(posts){
+        res.render('listaDiaria', {posts: posts})
+    })    
 })
 
 server.listen(8081, function() {
