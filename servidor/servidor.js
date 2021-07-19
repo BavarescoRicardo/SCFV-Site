@@ -1,7 +1,6 @@
 const express = require('express');
 const server = express();
 const handlebars = require('express-handlebars')
-var moment = require('moment');  
 
 // Sessao
 const session = require("express-session")
@@ -35,6 +34,9 @@ const Contato = require('./models/Contato')
 const Diaria = require('./models/Diaria')
 const Presenca = require('./models/Presenca')
 const UsuarioPresenca = require('./models/UsuarioPresenca')
+
+// Vetor de indices ids auxiliares
+let inputValue = 0;
 
 // variavel cors para acessar servidores remotos
 var cors = require('cors');
@@ -180,8 +182,6 @@ server.post('/novachamada', function(req, res) {
         },
         raw : true 
     }).then(function(posts){
-        user =>  res.json(posts) 
-        console.log("Lista de usuarios filtrados na turma " + req.body.cmbTurma + " " + posts)
         res.render('presencaUsuarios', {posts: posts});        
     }).catch(function(erro){
         res.send("Ocorreu um erro " + erro)
@@ -195,9 +195,25 @@ server.post('/darpresenca', function(req, res) {
        dia: req.body.diaoficina,
        turma: req.body.cmbTurma,
        oficina: req.body.cmbOficina,
-       turno: req.body.cmbTurno
-    }).then(function(){
-//       res.redirect('/usuariolista');
+       turno: req.body.cmbTurno       
+    }).then(function(dados){      
+
+        // Pega todos os valores do check box com o mesmo nome / o nome pode ser igual desde q o id seja diferente
+            // no valor de cada opção checada coloca-se o id do usuario
+            // este vetor tem somente as opções marcadas
+            inputValue = req.body['idusuario'];
+            
+            for (let index = 0; index < inputValue.length; index++) {
+                console.log(inputValue[index].name + " Valor =  " + inputValue[index])
+                const element = inputValue[index];
+                // Criar usuario presenca fk com presenca
+                UsuarioPresenca.create({
+                    codigoAluno:  inputValue[index],
+                    codigoPresenca:  dados.id
+                })
+            }
+
+        res.render('presenca')
     }).catch(function(erro){
         res.send("Ocorreu um erro " + erro)
     })
