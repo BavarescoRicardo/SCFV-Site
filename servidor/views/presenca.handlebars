@@ -1,54 +1,60 @@
-<h2>Presenças e faltas</h2>
-<form  action="/novachamada" method="POST">
-    <div style="float:left;">
-        <p>Dia da oficina</p>
-    </div>    
-    <div style="float:left; margin-left: 2%;">    
-        <input id="date" type="date" name="diaoficina"/>
-    </div>
-    <div style="float:left; margin-right: 2%; margin-left: 2%;">
-        <p>Oficina:</p>
-    </div>
-    <div style="margin-left: 2%;">
-        <select id="oficina" name="cmbOficina">
-            <option value='1'>Informatica</option>
-            <option value='2'>Esporte</option>
-            <option value='3'>Meio Ambiente</option>
-            <option value='4'>Artesanato</option>
-            <option value='5'>Capoeira</option>
-        </select>
-    </div>
+<div class="container">
+    <h2>Presenças e faltas</h2>
+    <form  action="/novachamada" method="POST">
+        <div class="row">
+            <div class="col-2">
+                <p>Dia da oficina</p>
+            </div>    
+            <div class="col-2">
+                <input id="date" type="date" name="diaoficina"/>
+            </div>
 
-<br>
-    <div style="float:left; margin-right: 2%;">
-        <p>Turma:</p>
-    </div>
-    <div style="float:left; margin-left: 2%;">
-        <select id="Turma" name="cmbTurma">
-            <option value='1'>1</option>
-            <option value='2'>2</option>
-            <option value='3'>3</option>
-            <option value='4'>4</option>
-        </select>
-    </div>
-    <div style="float:left; margin-left: 2%;">
-        <p>Turno</p>
-    </div>
-
-    <div style="float:left; margin-left: 2%;">
-        <select id="turno" name="cmbTurno">
-            <option value='1'>Matutino</option>
-            <option value='2'>Vespertino</option>
-        </select>
-    </div>    
-    <br>    
-    <div class="row">
-        <div class="col-4">
-            <button type="submit">Nova chamada</button>
+            <div class="col-2">
+                <p>Oficina:</p>
+            </div>
+            <div class="col-2">
+                <select id="oficina" name="cmbOficina">
+                    <option value='1'>Informatica</option>
+                    <option value='2'>Esporte</option>
+                    <option value='3'>Meio Ambiente</option>
+                    <option value='4'>Artesanato</option>
+                    <option value='5'>Capoeira</option>
+                </select>
+            </div>
         </div>
-        <div class="col-2">
-            <a href="/lista_chamada_gravadas"><button type="button">Listar chamadas</button>
-        </div>
-    </div>
+        <div class="row">
+            <br>
+            <div class="col-2">
+                <p>Turma:</p>
+            </div>
+            <div class="col-2">
+                <select id="Turma" name="cmbTurma">
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <p>Turno</p>
+            </div>
 
-</form>
+            <div class="col-2">
+                <select id="turno" name="cmbTurno">
+                    <option value='1'>Matutino</option>
+                    <option value='2'>Vespertino</option>
+                </select>
+            </div>    
+            <br>    
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <button type="submit">Nova chamada</button>
+            </div>
+            <div class="col-2">
+                <a href="/lista_chamada_gravadas"><button type="button">Listar chamadas</button>
+            </div>
+        </div>
+
+    </form>
+</div>
