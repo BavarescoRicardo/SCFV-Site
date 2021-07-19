@@ -4,9 +4,9 @@
     <br/>
     {{#each posts}}
         <div class="row">
-            <h4>Dia: {{dataValues.dia_formed}}  Conteudo: {{dataValues.oficina}}</h4>
+            <h4>Dia: {{dataValues.dia_formed}}  Oficina: {{dataValues.oficina}}</h4>
             <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}}</h5>
-            {{!-- <a href= "/diaria/{{dataValues.id}}"><button>Ver diaria</button></a> --}}
+            <a href= "/diaria/{{dataValues.id}}"><button>Detalhar chamada</button></a>
         </div>
         <hr>        
     {{/each}}
