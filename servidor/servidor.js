@@ -191,13 +191,13 @@ server.post('/novachamada', function(req, res) {
     })
 })
 
-// Criar fk para n usuarios
+// Criar fk para de 1 presenca para n usuarios
 server.post('/userchamada', function(req, res) {
     // Pega todos os valores do check box com o mesmo nome / o nome pode ser igual desde q o id seja diferente
     // no valor de cada opção checada coloca-se o id do usuario
     // este vetor tem somente as opções marcadas
     inputValue = req.body['idusuario'];    
-    
+
     for (let index = 0; index < inputValue.length; index++) {
         // Criar usuario presenca fk com presenca
         UsuarioPresenca.create({
