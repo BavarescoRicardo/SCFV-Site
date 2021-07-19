@@ -36,7 +36,8 @@ const Presenca = require('./models/Presenca')
 const UsuarioPresenca = require('./models/UsuarioPresenca')
 
 // Vetor de indices ids auxiliares
-let inputValue = 0;
+let inputValue = [];
+var ult = 0;
 
 // variavel cors para acessar servidores remotos
 var cors = require('cors');
@@ -108,7 +109,7 @@ server.post('/cadastro', function(req, res) {
          }).then(function(){            
             res.redirect('/usuariolista');
          }).catch(function(erro){
-             res.send("Ocorreu um erro " + erro)
+            res.render('login_error');
          })
 })
 
@@ -175,7 +176,9 @@ server.post('/novachamada', function(req, res) {
        turma: req.body.cmbTurma,
        oficina: req.body.cmbOficina,
        turno: req.body.cmbTurno
-    })
+    }).then(function(dados){      
+            ult = dados.id;
+        })
     Usuario.findAll({ 
         where: {
             turma: req.body.cmbTurma
@@ -188,37 +191,22 @@ server.post('/novachamada', function(req, res) {
     })
 })
 
-server.post('/darpresenca', function(req, res) {
-    Presenca.create({            
-        // Cadastro novo usuario
-       codigo: 1,
-       dia: req.body.diaoficina,
-       turma: req.body.cmbTurma,
-       oficina: req.body.cmbOficina,
-       turno: req.body.cmbTurno       
-    }).then(function(dados){      
-
-        // Pega todos os valores do check box com o mesmo nome / o nome pode ser igual desde q o id seja diferente
-            // no valor de cada opção checada coloca-se o id do usuario
-            // este vetor tem somente as opções marcadas
-            inputValue = req.body['idusuario'];
-            
-            for (let index = 0; index < inputValue.length; index++) {
-                console.log(inputValue[index].name + " Valor =  " + inputValue[index])
-                const element = inputValue[index];
-                // Criar usuario presenca fk com presenca
-                UsuarioPresenca.create({
-                    codigoAluno:  inputValue[index],
-                    codigoPresenca:  dados.id
-                })
-            }
-
-        res.render('presenca')
-    }).catch(function(erro){
-        res.send("Ocorreu um erro " + erro)
-    })
+// Criar fk para n usuarios
+server.post('/userchamada', function(req, res) {
+    // Pega todos os valores do check box com o mesmo nome / o nome pode ser igual desde q o id seja diferente
+    // no valor de cada opção checada coloca-se o id do usuario
+    // este vetor tem somente as opções marcadas
+    inputValue = req.body['idusuario'];    
     
-})
+    for (let index = 0; index < inputValue.length; index++) {
+        // Criar usuario presenca fk com presenca
+        UsuarioPresenca.create({
+            codigoAluno:  inputValue[index],
+            codigoPresenca:  ult
+        })
+    }
+    res.render('presenca')
+}) 
 
 server.get('/listapresenca', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
