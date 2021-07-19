@@ -208,6 +208,7 @@ server.post('/userchamada', function(req, res) {
     res.render('presenca')
 }) 
 
+// Tela que lista todos os usuarios de certa turma para dar presença ou falta
 server.get('/listapresenca', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
@@ -215,6 +216,24 @@ server.get('/listapresenca', function(req, res) {
     })    
 })
 
+server.get('/lista_chamada_gravadas', function(req, res) {
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
+    Presenca.findAll({        
+        attributes: [
+            'id',
+            'oficina',
+            'turma',
+            'turno',
+            [Presenca.sequelize.fn('date_format', Presenca.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
+        ],
+        order: [['dia', 'DESC'], ['turno', 'ASC']]
+    })
+        .then(function(posts){
+        res.render('listaChamadas', {posts: posts})
+    })    
+})
+
+// Lista os diarios de classe já cadastrados
 server.get('/listardiario', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     Diaria.findAll({        

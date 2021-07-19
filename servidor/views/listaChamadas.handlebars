@@ -1,0 +1,17 @@
+<h2>Lista de chamadas</h2>
+<br>
+<div class="container">
+    <br/>
+    {{#each posts}}
+        <div class="row">
+            <h4>Dia: {{dataValues.dia_formed}}  Conteudo: {{dataValues.oficina}}</h4>
+            <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}}</h5>
+            {{!-- <a href= "/diaria/{{dataValues.id}}"><button>Ver diaria</button></a> --}}
+        </div>
+        <hr>        
+    {{/each}}
+</div>
+
+<div style="float:left; margin-left: 3%;">
+    <a href="/diariocnteudo"><button type="submit">Nova chamada</button></a>
+</div>
