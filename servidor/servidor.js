@@ -159,7 +159,7 @@ server.post('/novodiario', function(req, res) {
        observacao: req.body.obs
     }).then(function(){
 //       res.redirect('/usuariolista');
-        Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
+        Diaria.findAll({order: [['dia', 'DESC']]}).then(function(posts){
             res.render('listaDiaria', {posts: posts})
         })
     }).catch(function(erro){
