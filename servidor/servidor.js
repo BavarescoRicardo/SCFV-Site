@@ -93,8 +93,7 @@ server.post('/logar', function(req, res) {
 
 server.get('/deletar/:user', function(req, res) {        
     Usuario.destroy({where: {'id' : req.params.user}}).then(function(){
-        res.send("<h1>Tentativa de apagar o usuario:  " + req.params.user+"</h1>");
-        console.log("Registro apagado com sucessor");
+        res.redirect('/usuariolista');
     }).catch(function(erro){
         console.log("Item nao encontrado " +req.params.user + " " + erro)
     })

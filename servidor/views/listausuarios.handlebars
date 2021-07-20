@@ -6,7 +6,7 @@
     <div class="row">
         <h4>Nome: {{dataValues.nome}}</h4>
         <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}} Bairro: {{dataValues.bairro}}</h5>
-        <a href= "/deletar/{{id}}{{dataValues.id}}"><button>Deletar</button></a>
+        <a href= "/deletar/{{id}}{{dataValues.id}}" onclick="return confirm('Tem certeza que deseja apagar este us=uario?')"><button>Deletar</button></a>
     
     <hr>
     </div>
