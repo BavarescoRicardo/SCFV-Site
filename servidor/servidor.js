@@ -167,6 +167,7 @@ server.post('/novodiario', function(req, res) {
     })
 })
 
+// Cadastrar nova chamada e em seguida listar os usuarios da turma selecionada para dar presença ou faltas
 server.post('/novachamada', function(req, res) {
     Presenca.create({            
         // Cadastro novo usuario
@@ -215,6 +216,7 @@ server.get('/listapresenca', function(req, res) {
     })    
 })
 
+// Listar as chamadas cadastradas por data da oficina
 server.get('/lista_chamada_gravadas', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     Presenca.findAll({        
@@ -230,6 +232,26 @@ server.get('/lista_chamada_gravadas', function(req, res) {
         .then(function(posts){
         res.render('listaChamadas', {posts: posts})
     })    
+})
+
+// Detaljar os usuarios da chamada selecionada e mostrar os  presentes
+server.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {    
+    Usuario.findAll({
+        where: {
+            id: UsuarioPresenca.findAll({ 
+                attributes: [ 'id'  ],
+                    where: {
+                        'codigoPresenca' : req.params.idpresenca
+                    },
+                    raw : true
+                })
+            },
+        raw : true 
+    }).then(function(posts){
+        res.render('usuariosPresentesChamada', {posts: posts});        
+    }).catch(function(erro){
+        res.send("Ocorreu um erro " + erro)
+    })
 })
 
 // Lista os diarios de classe já cadastrados
