@@ -264,20 +264,26 @@ server.get('/lista_chamada_gravadas', function(req, res) {
 // Detalhar os usuarios da chamada selecionada e mostrar os  presentes
 server.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {    
 
-    var idsProjects=function (req,res,next)
-    {
+    let idsProjects = new Array();
         UsuarioPresenca.findAll({ 
-            attributes: ['id'],
+            attributes: ['codigoAluno'],
             where: {
                 'codigoPresenca' : req.params.idpresenca
-            }}
-        );
-
-    }
-        let usersList = new Array();
+            },
+            raw : true
+        }).then(function(address){
+            idsProjects = address;
+            console.log("codigo econtrado  " + idsProjects[0].codigoAluno)
+            console.log("tamanho da lista de ids  " + idsProjects.length)            
+        })
       
+        // Declarar array de usuarios
+        let usersList = new Array();
+
         for (let index = 0; index < idsProjects.length; index++) {
-          const myID = idsProjects[index];          
+            console.log("Exibir conteudo da lista " + idsProjects[index].codigoAluno + " na pos: " + index)
+            var myID = idsProjects[index].codigoAluno;          
+          
             Usuario.findOne({
                 where: {  id: 1 },  raw : true
                 }).then(function(posts){ // console.log("  array de identificadores  " + posts)
@@ -287,6 +293,7 @@ server.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {
         }
     res.render('presencaUsuarios', {posts: usersList});        
 })
+
 
 
 // Lista os diarios de classe já cadastrados
