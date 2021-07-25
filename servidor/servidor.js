@@ -257,7 +257,7 @@ server.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {
                 usersList.push(posts)
                 }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
             }
-        res.render('presencaUsuarios', {posts: usersList});        
+        res.render('usuariosPresentesChamada', {posts: usersList});        
     })
 })
 

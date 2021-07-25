@@ -1,17 +1,27 @@
-<h2>Usuarios que estavam presentes</h2>
+<h2>Usuarios que estavam presentes na chamada</h2>
 <br>
 <div class="container">
     <br>
     <br>
-    <h2>Lista de usuarios</h2>          
+    <h2>Chamada do dia: 0x da turma: 0x Periodo 0x</h2>          
+    <h2>Tabela de usuarios</h2>          
     <hr>
     <br/>
-    {{#each posts}}
-    <div class="row">
-        <h4>Nome: {{nome}}</h4>
-    </div>
-        <hr>        
-    {{/each}}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>Nomes</th>
+        </thead>
+        <tbody>
+            {{#each posts}}    
+                <tr>
+                    <td> {{nome}} </td>
+                </tr>                      
+            {{/each}}    
+        </tbody>
+    </table>    
+    <br>
+    <br>
+    
 </div>
 
 <div style="float:left; margin-left: 3%;">
