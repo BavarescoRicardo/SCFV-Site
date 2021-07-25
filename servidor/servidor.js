@@ -235,36 +235,9 @@ server.get('/lista_chamada_gravadas', function(req, res) {
 })
 
 // Detalhar os usuarios da chamada selecionada e mostrar os  presentes
-        // server.get('/listar_usuarios_chamadassq/:idpresenca', function(req, res) {    
-        //     Usuario.findAll({
-        //         where: {
-        //             [Usuario.conexao.Sequelize.Op.in]:
-        // //            id:
-        //              { 
-        //                     in: 
-        //                     UsuarioPresenca.findAll({ 
-        //                         attributes: [ 'id'  ],
-        //                         where: {
-        //                             'codigoPresenca' : req.params.idpresenca
-        //                         },   
-        //                         raw : true                        
-        //                     })
-        //             },
-        //         raw : true } 
-        //     }).then(function(posts){
-        //         res.render('usuariosPresentesChamada', {posts: posts});        
-        //     }).catch(function(erro){
-        //         res.send("Ocorreu um erro " + erro)
-        //     })
-        // })
-
-
-
-// teste look up
-// Detalhar os usuarios da chamada selecionada e mostrar os  presentes
 server.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {    
 
-// Declarar dos arrays de presencas e usuarios
+    // Declarar dos arrays de presencas e usuarios
     let usersList = new Array();
     let idsProjects = new Array();
     UsuarioPresenca.findAll({ 
@@ -283,8 +256,8 @@ server.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {
                 }).then(function(posts){
                 usersList.push(posts)
                 }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
-        }
-    res.render('presencaUsuarios', {posts: usersList});        
+            }
+        res.render('presencaUsuarios', {posts: usersList});        
     })
 })
 
