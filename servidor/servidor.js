@@ -260,38 +260,32 @@ server.get('/lista_chamada_gravadas', function(req, res) {
 
 
 
-// teste lok up
+// teste look up
 // Detalhar os usuarios da chamada selecionada e mostrar os  presentes
 server.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {    
 
+// Declarar dos arrays de presencas e usuarios
+    let usersList = new Array();
     let idsProjects = new Array();
-        UsuarioPresenca.findAll({ 
-            attributes: ['codigoAluno'],
-            where: {
-                'codigoPresenca' : req.params.idpresenca
-            },
-            raw : true
-        }).then(function(address){
-            idsProjects = address;
-            console.log("codigo econtrado  " + idsProjects[0].codigoAluno)
-            console.log("tamanho da lista de ids  " + idsProjects.length)            
-        })
-      
-        // Declarar array de usuarios
-        let usersList = new Array();
+    UsuarioPresenca.findAll({ 
+        attributes: ['codigoAluno'],
+        where: {
+            'codigoPresenca' : req.params.idpresenca
+        }
+    }).then(function(address){
+        idsProjects = address;
 
         for (let index = 0; index < idsProjects.length; index++) {
-            console.log("Exibir conteudo da lista " + idsProjects[index].codigoAluno + " na pos: " + index)
-            var myID = idsProjects[index].codigoAluno;          
-          
+            var myID = idsProjects[index].codigoAluno;            
+        
             Usuario.findOne({
-                where: {  id: 1 },  raw : true
-                }).then(function(posts){ // console.log("  array de identificadores  " + posts)
-                console.log("Lista de id com novo id: " + posts)
+                where: {  id: myID },  raw : true
+                }).then(function(posts){
                 usersList.push(posts)
                 }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
         }
     res.render('presencaUsuarios', {posts: usersList});        
+    })
 })
 
 
