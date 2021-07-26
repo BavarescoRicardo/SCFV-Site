@@ -39,10 +39,24 @@ usuarios.get('/cadastrousuario', function(req, res) {
     res.render('cadastrousuario')
 })
 
-
+// Listas listas de usuarios
 usuarios.get('/usuariolista', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
+        res.render('listausuarios', {posts: posts})
+    })  
+})
+
+// lista de usuarios com filtros
+usuarios.post('/usuariolista_filtrado', function(req, res) {
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
+    Usuario.findAll({
+        where: {
+            turma: req.body.cmbTurma,
+            turno: req.body.cmbTurno
+        },
+        order: [['nome', 'ASC']]
+    }).then(function(posts){
         res.render('listausuarios', {posts: posts})
     })  
 })

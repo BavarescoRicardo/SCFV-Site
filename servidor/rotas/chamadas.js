@@ -98,7 +98,6 @@ rotas.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {
             Usuario.findOne({
                 where: {  id: myID },  raw : true
                 }).then(function(posts){
-                    console.log("data da presencaList " + presencaList.dia + " turno da presenca " + presencaList.turno + " turma da presenca " + presencaList.turma)
                     usersList.push(posts)
                 }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
             }

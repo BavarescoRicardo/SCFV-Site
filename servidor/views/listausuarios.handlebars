@@ -1,33 +1,36 @@
 <div class="container">
     <h2>Lista de usuarios</h2>      
-    <div class="row">
-        <br>
-        <div class="col-1">
-            <p>Turma:</p>
-        </div>
-        <div class="col-1">
-            <select id="Turma" name="cmbTurma">
-                <option value='1'>1</option>
-                <option value='2'>2</option>
-                <option value='3'>3</option>
-                <option value='4'>4</option>
-            </select>
-        </div>
-        <div class="col-1">
-            <p>Turno</p>
-        </div>
 
-        <div class="col-2">
-            <select id="turno" name="cmbTurno">
-                <option value='1'>Matutino</option>
-                <option value='2'>Vespertino</option>
-            </select>
+    <form action="/usuarios/usuariolista_filtrado" method="POST">
+        <div class="row">
+            <br>
+            <div class="col-1">
+                <p>Turma:</p>
+            </div>
+            <div class="col-1">
+                <select id="Turma" name="cmbTurma">
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                </select>
+            </div>
+            <div class="col-1">
+                <p>Turno</p>
+            </div>
+
+            <div class="col-2">
+                <select id="turno" name="cmbTurno">
+                    <option value='1'>Matutino</option>
+                    <option value='2'>Vespertino</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <button type="submit">Filtrar</button>
+            </div>    
+            <br>    
         </div>
-        <div class="col-2">
-            <button type="button">Filtrar</button>
-        </div>    
-        <br>    
-    </div>
+    </form>
 
     <hr>
     <br/>
