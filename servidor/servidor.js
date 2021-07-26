@@ -14,12 +14,10 @@ server.use(session({
 }))
 server.use(flash())
 
-        // // Middleware
-        // server.use((req, res, next) => {
-        //     res.locals.success_msg = req.flash("success_msg")
-        //     res.locals.error_msg = req.flash("error_msg")
-        // })
 
+// Rotas
+const chamadas = require('./rotas/chamadas') 
+server.use('/chamada',chamadas)
 // constante caminho
 const path = require("path")
 server.use(express.static(path.join(__dirname, "public"))) 
@@ -32,8 +30,6 @@ const Escola = require('./models/Escola')
 const Login = require('./models/Login')
 const Contato = require('./models/Contato')
 const Diaria = require('./models/Diaria')
-const Presenca = require('./models/Presenca')
-const UsuarioPresenca = require('./models/UsuarioPresenca')
 
 // Vetor de indices ids auxiliares
 let inputValue = [];
@@ -166,47 +162,7 @@ server.post('/novodiario', function(req, res) {
         res.send("Ocorreu um erro " + erro)
     })
 })
-
-// Cadastrar nova chamada e em seguida listar os usuarios da turma selecionada para dar presença ou faltas
-server.post('/novachamada', function(req, res) {
-    Presenca.create({            
-        // Cadastro novo usuario
-       codigo: 1,
-       dia: req.body.diaoficina,
-       turma: req.body.cmbTurma,
-       oficina: req.body.cmbOficina,
-       turno: req.body.cmbTurno
-    }).then(function(dados){      
-            ult = dados.id;
-        })
-    Usuario.findAll({ 
-        where: {
-            turma: req.body.cmbTurma
-        },
-        raw : true 
-    }).then(function(posts){
-        res.render('presencaUsuarios', {posts: posts});        
-    }).catch(function(erro){
-        res.send("Ocorreu um erro " + erro)
-    })
-})
-
-// Criar fk para de 1 presenca para n usuarios
-server.post('/userchamada', function(req, res) {
-    // Pega todos os valores do check box com o mesmo nome / o nome pode ser igual desde q o id seja diferente
-    // no valor de cada opção checada coloca-se o id do usuario
-    // este vetor tem somente as opções marcadas
-    inputValue = req.body['idusuario'];    
-
-    for (let index = 0; index < inputValue.length; index++) {
-        // Criar usuario presenca fk com presenca
-        UsuarioPresenca.create({
-            codigoAluno:  inputValue[index],
-            codigoPresenca:  ult
-        })
-    }
-    res.render('presenca')
-}) 
+ 
 
 // Tela que lista todos os usuarios de certa turma para dar presença ou falta
 server.get('/listapresenca', function(req, res) {
@@ -215,63 +171,6 @@ server.get('/listapresenca', function(req, res) {
         res.render('presenca', {posts: posts})
     })    
 })
-
-// Listar as chamadas cadastradas por data da oficina
-server.get('/lista_chamada_gravadas', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
-    Presenca.findAll({        
-        attributes: [
-            'id',
-            'oficina',
-            'turma',
-            'turno',
-            [Presenca.sequelize.fn('date_format', Presenca.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
-        ],
-        order: [['dia', 'DESC'], ['turno', 'ASC']]
-    })
-        .then(function(posts){
-        res.render('listaChamadas', {posts: posts})
-    })    
-})
-
-// Detalhar os usuarios da chamada selecionada e mostrar os  presentes
-server.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {    
-
-    // Declarar dos arrays de presencas e usuarios
-    let usersList = new Array();
-    let presencaList = new Array();
-    let idsProjects = new Array();
-    UsuarioPresenca.findAll({ 
-        attributes: ['codigoAluno'],
-        where: {
-            'codigoPresenca' : req.params.idpresenca
-        }
-    }).then(function(address){
-        idsProjects = address;
-
-        // Localizar data e turma da presenca selecionada
-        Presenca.findOne({
-                where: {  id: req.params.idpresenca },  raw : true 
-        }).then(function(presc){            
-            presencaList.push(presc)            
-        }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
-
-        // Laço para selecionar cada usuario
-        for (let index = 0; index < idsProjects.length; index++) {
-            var myID = idsProjects[index].codigoAluno;            
-        
-            Usuario.findOne({
-                where: {  id: myID },  raw : true
-                }).then(function(posts){
-                    console.log("data da presencaList " + presencaList.dia + " turno da presenca " + presencaList.turno + " turma da presenca " + presencaList.turma)
-                    usersList.push(posts)
-                }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
-            }
-        res.render('usuariosPresentesChamada', { presenca: presencaList,  posts: usersList } );        
-    })
-})
-
-
 
 // Lista os diarios de classe já cadastrados
 server.get('/listardiario', function(req, res) {
