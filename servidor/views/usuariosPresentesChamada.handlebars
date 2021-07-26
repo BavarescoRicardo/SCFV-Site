@@ -1,19 +1,27 @@
-<h2>Usuarios que estavam presentes na chamada</h2>
+<h2>Usuarios que estavam presentes na oficina</h2>
 <br>
 <div class="container">
     <br>
     <br>
-    <h2>Chamada do dia: 0x da turma: 0x Periodo 0x</h2>          
-    <h2>Tabela de usuarios</h2>          
+    <div id="paginatabela">
+        {{#each presenca}}    
+            <h2>Chamada do dia: {{dia}}</h2>
+            <h3>Turma: {{turma}} Turno: {{turno}}</h3>          
+        {{/each}}    
+        
+        <h2>Tabela de usuarios</h2>   
+    </div>
     <hr>
     <br/>
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover" id="tabelachamada">
         <thead>
+            <tH></tH>
             <th>Nomes</th>
         </thead>
         <tbody>
             {{#each posts}}    
                 <tr>
+                    <td></td>
                     <td> {{nome}} </td>
                 </tr>                      
             {{/each}}    
@@ -24,7 +32,32 @@
     
 </div>
 
-<div style="float:left; margin-left: 3%;">
+<div style="float:left; margin-left: 3%;">    
+    <button type="submit" onClick="printPage()">Imprimir a tabela acima</button>
+</div>
+
+<div style="float:left; margin-left: 5%;">    
     <a href="/lista_chamada_gravadas"><button type="submit">Voltar a lista</button></a>
 </div>
 
+
+<script>
+    function printPage() {
+        var mywindow = window.open('', 'title', 'height=400width=600');
+        var strPrint = '';
+        strPrint += '<html>';
+        strPrint += '<link rel="stylesheet" href="/css/bootstrap.min.css"/>';
+        strPrint += '</head><body>';
+        strPrint += document.getElementById('paginatabela').innerHTML;
+        strPrint += '<table width="60%" style="margin-left: 20%;"';
+            strPrint += document.getElementById('tabelachamada').innerHTML;
+        strPrint += '<table>';
+        strPrint += '</body></html>';
+
+        // Print the document
+        mywindow.document.write(strPrint);
+
+        mywindow.print();
+        mywindow.close();
+    }
+</script>

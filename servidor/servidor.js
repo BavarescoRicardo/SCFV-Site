@@ -239,6 +239,7 @@ server.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {
 
     // Declarar dos arrays de presencas e usuarios
     let usersList = new Array();
+    let presencaList = new Array();
     let idsProjects = new Array();
     UsuarioPresenca.findAll({ 
         attributes: ['codigoAluno'],
@@ -248,16 +249,25 @@ server.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {
     }).then(function(address){
         idsProjects = address;
 
+        // Localizar data e turma da presenca selecionada
+        Presenca.findOne({
+                where: {  id: req.params.idpresenca },  raw : true 
+        }).then(function(presc){            
+            presencaList.push(presc)            
+        }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
+
+        // Laço para selecionar cada usuario
         for (let index = 0; index < idsProjects.length; index++) {
             var myID = idsProjects[index].codigoAluno;            
         
             Usuario.findOne({
                 where: {  id: myID },  raw : true
                 }).then(function(posts){
-                usersList.push(posts)
+                    console.log("data da presencaList " + presencaList.dia + " turno da presenca " + presencaList.turno + " turma da presenca " + presencaList.turma)
+                    usersList.push(posts)
                 }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
             }
-        res.render('usuariosPresentesChamada', {posts: usersList});        
+        res.render('usuariosPresentesChamada', { presenca: presencaList,  posts: usersList } );        
     })
 })
 
