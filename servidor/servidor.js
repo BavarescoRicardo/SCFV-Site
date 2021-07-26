@@ -18,6 +18,10 @@ server.use(flash())
 // Rotas
 const chamadas = require('./rotas/chamadas') 
 server.use('/chamada',chamadas)
+
+const usuarios = require('./rotas/usuarios') 
+server.use('/usuarios',usuarios)
+
 // constante caminho
 const path = require("path")
 server.use(express.static(path.join(__dirname, "public"))) 
@@ -55,11 +59,6 @@ server.get('/', function(req, res) {
     res.render('login')
 })
 
-server.get('/cadastrousuario', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
-    res.render('cadastrousuario')
-})
-
         // server.get('/usuarios', function(req, res) {
         //     res.sendFile(__dirname + "/arquivos/index.html");
         // //    res.send('<h1>Requisição get  - usuarios  -  Certo</h1>');
@@ -80,18 +79,10 @@ server.post('/logar', function(req, res) {
         if(sensors.length === 0) throw error;        
         req.session.login = req.body.user
 
-        res.redirect('/usuariolista');
+        res.redirect('/usuarios/usuariolista');
     }).catch(function(erro){
         req.session.login = null
         res.render('login_error');
-    })
-})
-
-server.get('/deletar/:user', function(req, res) {        
-    Usuario.destroy({where: {'id' : req.params.user}}).then(function(){
-        res.redirect('/usuariolista');
-    }).catch(function(erro){
-        console.log("Item nao encontrado " +req.params.user + " " + erro)
     })
 })
 
@@ -102,41 +93,13 @@ server.post('/cadastro', function(req, res) {
              nome: req.body.user,
              senha: req.body.senha
          }).then(function(){            
-            res.redirect('/usuariolista');
+            res.redirect('/usuarios/usuariolista');
          }).catch(function(erro){
             res.render('login_error');
          })
 })
 
-server.post('/cadastrousuario', function(req, res) {             
-    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
-    Usuario.create({            
-             // Cadastro novo usuario
-             codigo: 1,
-            nome: req.body.nome,
-            turno: req.body.cmbTurno,
-            bairro: req.body.bairro,
-            datanasc: req.body.nasc,
-            turma: req.body.turma,
-            idescola: req.body.cmbEscola            
-         }).then(function(){
-            res.redirect('/usuariolista');
-         }).catch(function(erro){
-             res.send("Ocorreu um erro " + erro)
-         })
-})
-
-
-server.get('/usuariolista', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
-    Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
-        res.render('listausuarios', {posts: posts})
-    })
-    
-})
-
 // Rota do servidor para criar novo diario de classe // postar conteudos
-
 server.get('/diariocnteudo', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     res.render('diaria')
@@ -154,22 +117,12 @@ server.post('/novodiario', function(req, res) {
        conteudo: req.body.conteudo,
        observacao: req.body.obs
     }).then(function(){
-//       res.redirect('/usuariolista');
         Diaria.findAll({order: [['dia', 'DESC']]}).then(function(posts){
             res.render('listaDiaria', {posts: posts})
         })
     }).catch(function(erro){
         res.send("Ocorreu um erro " + erro)
     })
-})
- 
-
-// Tela que lista todos os usuarios de certa turma para dar presença ou falta
-server.get('/listapresenca', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
-    Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
-        res.render('presenca', {posts: posts})
-    })    
 })
 
 // Lista os diarios de classe já cadastrados

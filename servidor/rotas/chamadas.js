@@ -23,7 +23,8 @@ rotas.post('/novachamada', function(req, res) {
         })
     Usuario.findAll({ 
         where: {
-            turma: req.body.cmbTurma
+            turma: req.body.cmbTurma,
+            turno: req.body.cmbTurno
         },
         raw : true 
     }).then(function(posts){
