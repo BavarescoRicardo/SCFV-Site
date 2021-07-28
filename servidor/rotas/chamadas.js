@@ -69,40 +69,42 @@ rotas.get('/lista_chamada_gravadas', function(req, res) {
     })    
 })
 
-// Detalhar os usuarios da chamada selecionada e mostrar os  presentes
+// Detalhar os usuarios que estavam presentes em uma chamada selecionada 
 rotas.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {    
+    
+    // Localizar data e turma da presenca selecionada
+    Presenca.findOne({
+        where: {  id: req.params.idpresenca },  raw : true 
+    }).then(function(presc){            
+        presencaList.push(presc)            
+    }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
 
     // Declarar dos arrays de presencas e usuarios
     let usersList = new Array();
     let presencaList = new Array();
-    let idsProjects = new Array();
+    let usuario_presencaIds = new Array();
+    console.log("id da tabela presenca selecionada  " + req.params.idpresenca)
     UsuarioPresenca.findAll({ 
         attributes: ['codigoAluno'],
         where: {
             'codigoPresenca' : req.params.idpresenca
-        }
-    }).then(function(address){
-        idsProjects = address;
-
-        // Localizar data e turma da presenca selecionada
-        Presenca.findOne({
-                where: {  id: req.params.idpresenca },  raw : true 
-        }).then(function(presc){            
-            presencaList.push(presc)            
-        }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
+        },  raw : true 
+    }).then(function(result_idUsuarios){
+        usuario_presencaIds = result_idUsuarios;
 
         // Laço para selecionar cada usuario
-        for (let index = 0; index < idsProjects.length; index++) {
-            var myID = idsProjects[index].codigoAluno;            
-        
+        for (let index = 0; index < usuario_presencaIds.length; index++) {
+            var myID = usuario_presencaIds[index].codigoAluno;            
+            console.log("id do aluno em questao  " + myID)
             Usuario.findOne({
                 where: {  id: myID },  raw : true
                 }).then(function(posts){
+                    console.log("e o nome do aluno em questao  " + posts.nome)
                     usersList.push(posts)
                 }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
-            }
+            }        
         res.render('usuariosPresentesChamada', { presenca: presencaList,  posts: usersList } );        
-    })
+    })    
 })
 
 module.exports = rotas
