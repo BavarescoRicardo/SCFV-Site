@@ -65,7 +65,7 @@ server.get('/', function(req, res) {
         // })
 
 server.get('/sobre', function(req, res) {
-    res.send('<h1>Requisição get - sobre  -  Certo</h1>');
+    res.render('horario')
 })
 
 server.post('/logar', function(req, res) {

@@ -1,30 +1,57 @@
-<h2>Horário das oficinas</h2>
+<h2>Sobre</h2>
 <br>
 <div class="container">
     <br>
     <br>
     <div id="paginatabela">
-        {{#each presenca}}    
-            <h2>Chamada do dia: {{dia}}</h2>
-            <h3>Turma: {{turma}} Turno: {{turno}}</h3>          
-        {{/each}}    
-        
-        <h2>Tabela</h2>   
+        <h3>Horário das oficinas</h3>
+        <p>Dia:</p>        
+            <select id="Dias" name="cmbDia">
+                <option value='1'>Segunda</option>
+                <option value='2'>Terça</option>
+                <option value='3'>Quarta</option>
+                <option value='4'>Quinta</option>
+                <option value='5'>Sexta</option>
+            </select>
     </div>
     <hr>
     <br/>
     <table class="table table-bordered table-hover" id="tabelachamada">
         <thead>
-            <tH></tH>
-            <th>Nomes</th>
+            <caption>Aulas</caption>
+            <th>T1</th>
+            <th>T2</th>
+            <th>T3</th>
+            <th>T4</th>
         </thead>
         <tbody>
-            {{#each posts}}    
                 <tr>
-                    <td></td>
-                    <td> {{nome}} </td>
+                    <td>Capoeira</td>
+                    <td>Esporte</td>
+                    <td>Ambiente</td>
+                    <td>Informática</td>
                 </tr>                      
-            {{/each}}    
+
+                <tr>
+                    <td>Inofrmática</td>
+                    <td>Capoeira</td>
+                    <td>Artesanato</td>
+                    <td>Ambiente</td>
+                </tr>                                          
+
+                <tr>
+                    <td>Artesanato</td>
+                    <td>Informática</td>
+                    <td>Capoeira</td>
+                    <td>Esporte</td>
+                </tr>                      
+
+                <tr>
+                    <td>Ambiente</td>
+                    <td>Artesanato</td>
+                    <td>Esporte</td>
+                    <td>Capoeira</td>
+                </tr>                      
         </tbody>
     </table>    
     <br>
@@ -36,24 +63,13 @@
     <button type="submit" onClick="printPage()">Imprimir a tabela acima</button>
 </div>
 
+<br/>
+<br/>
+<hr/>
+<div >    
+    <h3>Autoria e desenvolvimento</h3> 
+    <h4>Ricardo Bavaresco</h>
+</div>
 
-<script>
-    function printPage() {
-        var mywindow = window.open('', 'title', 'height=400width=600');
-        var strPrint = '';
-        strPrint += '<html>';
-        strPrint += '<link rel="stylesheet" href="/css/bootstrap.min.css"/>';
-        strPrint += '</head><body>';
-        strPrint += document.getElementById('paginatabela').innerHTML;
-        strPrint += '<table width="60%" style="margin-left: 20%;"';
-            strPrint += document.getElementById('tabelachamada').innerHTML;
-        strPrint += '<table>';
-        strPrint += '</body></html>';
 
-        // Print the document
-        mywindow.document.write(strPrint);
 
-        mywindow.print();
-        mywindow.close();
-    }
-</script>
