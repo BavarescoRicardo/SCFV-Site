@@ -10,6 +10,9 @@ const Login = conexao.sequelize.define('login', {
     },
     senha: {
         type: conexao.Sequelize.STRING
+    },
+    permissao: {
+        type: conexao.Sequelize.INTEGER
     }
 })
 
