@@ -41,7 +41,7 @@ usuarios.get('/cadastrousuario', function(req, res) {
 
 // Listas listas de usuarios
 usuarios.get('/usuariolista', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
+    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0) ) res.render('login_error');            
     Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
         res.render('listausuarios', {posts: posts})
     })  
@@ -63,7 +63,7 @@ usuarios.post('/usuariolista_filtrado', function(req, res) {
 
 // Tela que lista todos os usuarios de certa turma para dar presença ou falta
 usuarios.get('/listapresenca', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
+    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0) ) res.render('login_error');            
     Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
         res.render('presenca', {posts: posts})
     })    

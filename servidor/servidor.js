@@ -69,15 +69,16 @@ server.get('/sobre', function(req, res) {
 })
 
 server.post('/logar', function(req, res) {
-    Login.findAll({ 
+    Login.findOne({ 
         where: {
             nome: req.body.user, senha: req.body.senha
         },
         raw : true 
-    }).then(function (sensors) {
-        user =>  res.json(sensors) 
-        if(sensors.length === 0) throw error;        
+    }).then(function (logdao) {
+        user =>  res.json(logdao) 
+        if(logdao.length === 0) throw error;        
         req.session.login = req.body.user
+        req.session.permissao = logdao.permissao
 
         res.redirect('/usuarios/usuariolista');
     }).catch(function(erro){
@@ -101,7 +102,7 @@ server.post('/cadastro', function(req, res) {
 
 // Rota do servidor para criar novo diario de classe // postar conteudos
 server.get('/diariocnteudo', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
+    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0)) res.render('login_error');            
     res.render('diaria')
 })
 
@@ -127,7 +128,7 @@ server.post('/novodiario', function(req, res) {
 
 // Lista os diarios de classe já cadastrados
 server.get('/listardiario', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
+    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0) ) res.render('login_error');            
     Diaria.findAll({        
         attributes: [
             'id',
