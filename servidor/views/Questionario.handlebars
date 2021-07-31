@@ -1,0 +1,60 @@
+
+<div class="container">
+    <h2>Questionarios</h2>
+    <form  action="/novodiario" method="POST">       
+        <div class="row">
+            <div class="col-3">
+                <p>Dia da oficina</p>                    
+                <input id="date" type="date" name="diaoficina"/>
+            </div>    
+            <div class="col-3">
+                <p>Oficina:</p>
+                <select id="oficina" name="cmbOficina">
+                    <option value='1'>Informatica</option>
+                    <option value='2'>Esporte</option>
+                    <option value='3'>Meio Ambiente</option>
+                    <option value='4'>Artesanato</option>
+                    <option value='5'>Capoeira</option>
+                </select>
+            </div>
+        </div>
+    <br>
+    <div class="row">
+        <div class="col-3">
+            <p>Turma:</p>        
+            <select id="Turma" name="cmbTurma">
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+            </select>
+        </div>
+        <div class="col-3">
+            <p>Turno</p>      
+            <select id="turno" name="cmbTurno">
+                <option value='1'>Matutino</option>
+                <option value='2'>Vespertino</option>
+            </select>
+        </div>
+    </div>
+        <br>
+    <div class="row">
+        <div class="col-11">
+            <label for="fname">Questão</label>
+            <textarea class="form-control" id="fname" name="conteudo" rows="3"></textarea>
+        </div>
+
+    </div>        
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <button type="submit">Nova questão</button>
+            </div>
+            <div class="col-2">
+                <a href="/listardiario"><button type="button">Listar questionarios</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>

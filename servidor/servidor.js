@@ -106,6 +106,11 @@ server.get('/diariocnteudo', function(req, res) {
     res.render('diaria')
 })
 
+// Rota do servidor para criar novo diario de classe // postar conteudos
+server.get('/quiz', function(req, res) {
+    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0)) res.render('login_error');            
+    res.render('Questionario')
+})
 
 server.post('/novodiario', function(req, res) {
     Diaria.create({            
