@@ -2,6 +2,40 @@
 <br>
 <div class="container">
     <br/>
+    <form action="/chamada/filtra_chamada_gravadas" method="POST">
+        <div class="row">
+            <br>
+            <div class="col-1">
+                <p>Turma:</p>
+            </div>
+            <div class="col-1">
+                <select id="Turma" name="cmbTurma">
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                </select>
+            </div>
+            <div class="col-1">
+                <p>Turno</p>
+            </div>
+
+            <div class="col-2">
+                <select id="turno" name="cmbTurno">
+                    <option value='1'>Matutino</option>
+                    <option value='2'>Vespertino</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <button type="submit">Filtrar</button>
+            </div>  
+            <br>    
+        </div>
+    </form>
+    <div class="col-2">
+        <a href= "/chamada/lista_chamada_gravadas" onclick="return confirm('Mostrar todos as chamadas?')"><button type="button">Limpar filtros</button></a>    
+    </div> 
+
     {{#each posts}}
         <div class="row">
             <h4>Dia: {{dataValues.dia_formed}}  Oficina: {{dataValues.oficina}}</h4>

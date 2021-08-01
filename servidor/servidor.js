@@ -52,7 +52,6 @@ server.use(cors());
 let mensagemLogin = [];
 
 
-
 // Configurar
     //Template
     server.engine('handlebars', handlebars({defaultLayout: 'main'}))

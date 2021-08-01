@@ -72,6 +72,33 @@ rotas.get('/lista_chamada_gravadas', function(req, res) {
     })    
 })
 
+
+// Filtrar as chamadas cadastradas por data da oficina
+rotas.post('/filtra_chamada_gravadas', function(req, res) {
+    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0))
+    {
+        res.render('login_error', {msg: mensagemLogin});
+    }           
+    Presenca.findAll({        
+        attributes: [
+            'id',
+            'oficina',
+            'turma',
+            'turno',
+            [Presenca.sequelize.fn('date_format', Presenca.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
+        ],
+        where: {
+            turma: req.body.cmbTurma,
+            turno: req.body.cmbTurno
+        },
+        order: [['dia', 'DESC'], ['turno', 'ASC']]
+    })
+        .then(function(posts){
+        res.render('listaChamadas', {posts: posts})
+    })    
+})
+
+
 // Detalhar os usuarios que estavam presentes em uma chamada selecionada 
 rotas.get('/listar_usuarios_chamadas/:idpresenca', function(req, res) {    
     
