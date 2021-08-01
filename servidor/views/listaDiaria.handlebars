@@ -5,12 +5,29 @@
     {{#each posts}}
         <div class="row">
             <h4>Dia: {{dataValues.dia_formed}}  Conteudo: {{dataValues.conteudo}}</h4>
-            <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}}</h5>
-            Detalhes do conteúdo:  {{dataValues.observacao}}
-            <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content={{dataValues.observacao}}>
-                Popover on top
-            </button>
-            
+            <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}}</h5>                       
+
+                            <!-- Button trigger modal -->
+                <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Detalhes do conteúdo:
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detalhes do Conteudo do dia {{dataValues.dia_formed}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {{dataValues.observacao}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                    </div>
+                </div>
         </div>
         <hr>        
     {{/each}}
