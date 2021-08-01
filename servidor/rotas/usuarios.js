@@ -41,7 +41,10 @@ usuarios.get('/cadastrousuario', function(req, res) {
 
 // Listas listas de usuarios
 usuarios.get('/usuariolista', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0) ) res.render('login_error');            
+    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0))
+    {
+        res.render('login_error', {msg: mensagemLogin});
+    } 
     Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
         res.render('listausuarios', {posts: posts})
     })  

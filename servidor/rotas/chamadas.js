@@ -53,7 +53,10 @@ rotas.post('/userchamada', function(req, res) {
 
 // Listar as chamadas cadastradas por data da oficina
 rotas.get('/lista_chamada_gravadas', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0) ) res.render('login_error');            
+    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0))
+    {
+        res.render('login_error', {msg: mensagemLogin});
+    }           
     Presenca.findAll({        
         attributes: [
             'id',

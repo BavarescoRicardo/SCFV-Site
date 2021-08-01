@@ -43,6 +43,12 @@ var ult = 0;
 var cors = require('cors');
 server.use(cors());
 
+
+// Array de mensagens após login com erros ou usuario logado
+let mensagemLogin = [];
+
+
+
 // Configurar
     //Template
     server.engine('handlebars', handlebars({defaultLayout: 'main'}))
@@ -77,13 +83,17 @@ server.post('/logar', function(req, res) {
     }).then(function (logdao) {
         user =>  res.json(logdao) 
         if(logdao.length === 0) throw error;        
-        req.session.login = req.body.user
-        req.session.permissao = logdao.permissao
+        req.session.login = req.body.user;
+        req.session.permissao = logdao.permissao;
+
+        // Definir usuario e mensagem de login
+        mensagemLogin =  req.body.user + "  :Nivel: " + logdao.permissao;
 
         res.redirect('/usuarios/usuariolista');
     }).catch(function(erro){
-        req.session.login = null
-        res.render('login_error');
+        req.session.login = null;
+        mensagemLogin = "Usuario não encontrado";
+        res.render('login_error', {msg: mensagemLogin});
     })
 })
 
@@ -102,7 +112,10 @@ server.post('/cadastro', function(req, res) {
 
 // Rota do servidor para criar novo diario de classe // postar conteudos
 server.get('/diariocnteudo', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0)) res.render('login_error');            
+    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0))
+    {
+        res.render('login_error', {msg: mensagemLogin});
+    }             
     res.render('diaria')
 })
 
@@ -140,6 +153,7 @@ server.get('/listardiario', function(req, res) {
             'conteudo',
             'turma',
             'turno',
+            'observacao',
             [Diaria.sequelize.fn('date_format', Diaria.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
         ],
         order: [['dia', 'DESC'], ['turno', 'ASC']]
