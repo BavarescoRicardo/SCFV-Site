@@ -6,12 +6,6 @@ const diarios = express.Router();
 diarios.use(bodyParser.urlencoded({extended: false}))
 diarios.use(bodyParser.json())
 
-// Cadastrar nova chamada e em se
-const handlebars = require('express-handlebars')
-
-// Sessao
-const session = require("express-session")
-
 // Modelos
 const Diaria = require('../models/Diaria')
 const Usuario = require('../models/Usuario')
