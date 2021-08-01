@@ -2,12 +2,48 @@
 <br>
 <div class="container">
     <br/>
+
+    <form action="/diarios/listardiario_filtro" method="POST">
+        <div class="row">
+            <br>
+            <div class="col-1">
+                <p>Turma:</p>
+            </div>
+            <div class="col-1">
+                <select id="Turma" name="cmbTurma">
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                </select>
+            </div>
+            <div class="col-1">
+                <p>Turno</p>
+            </div>
+
+            <div class="col-2">
+                <select id="turno" name="cmbTurno">
+                    <option value='1'>Matutino</option>
+                    <option value='2'>Vespertino</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <button type="submit">Filtrar</button>
+            </div>  
+            <br> 
+        </div>
+    </form>
+
+        <div class="col-2">
+            <a href= "/diarios/listardiario" onclick="return confirm('Mostrar todos os diarios de classe?')"><button type="button">Limpar filtros</button></a>    
+        </div>
+
+
     {{#each posts}}
         <div class="row">
             <h4>Dia: {{dataValues.dia_formed}}  Conteudo: {{dataValues.conteudo}}</h4>
             <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}}</h5>                       
-
-                            <!-- Button trigger modal -->
+                            <!-- Botão ativa modal -->
                 <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Detalhes do conteúdo:
                 </button>
@@ -34,6 +70,6 @@
 </div>
 
 <div style="float:left; margin-left: 3%;">
-    <a href="/diariocnteudo"><button type="submit">Novo diario</button></a>
+    <a href="/diarios/diariocnteudo"><button type="submit">Novo diario</button></a>
 </div>
 

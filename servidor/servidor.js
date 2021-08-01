@@ -22,6 +22,10 @@ server.use('/chamada',chamadas)
 const usuarios = require('./rotas/usuarios') 
 server.use('/usuarios',usuarios)
 
+const diarios = require('./rotas/diarios') 
+server.use('/diarios',diarios)
+
+
 // constante caminho
 const path = require("path")
 server.use(express.static(path.join(__dirname, "public"))) 
@@ -111,56 +115,9 @@ server.post('/cadastro', function(req, res) {
 })
 
 // Rota do servidor para criar novo diario de classe // postar conteudos
-server.get('/diariocnteudo', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0))
-    {
-        res.render('login_error', {msg: mensagemLogin});
-    }             
-    res.render('diaria')
-})
-
-// Rota do servidor para criar novo diario de classe // postar conteudos
 server.get('/quiz', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0)) res.render('login_error');            
     res.render('Questionario')
-})
-
-server.post('/novodiario', function(req, res) {
-    Diaria.create({            
-        // Cadastro novo usuario
-       codigo: 1,
-       dia: req.body.diaoficina,
-       turma: req.body.cmbTurma,
-       oficina: req.body.cmbOficina,
-       turno: req.body.cmbTurno,
-       conteudo: req.body.conteudo,
-       observacao: req.body.obs
-    }).then(function(){
-        Diaria.findAll({order: [['dia', 'DESC']]}).then(function(posts){
-            res.render('listaDiaria', {posts: posts})
-        })
-    }).catch(function(erro){
-        res.send("Ocorreu um erro " + erro)
-    })
-})
-
-// Lista os diarios de classe já cadastrados
-server.get('/listardiario', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0) ) res.render('login_error');            
-    Diaria.findAll({        
-        attributes: [
-            'id',
-            'conteudo',
-            'turma',
-            'turno',
-            'observacao',
-            [Diaria.sequelize.fn('date_format', Diaria.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
-        ],
-        order: [['dia', 'DESC'], ['turno', 'ASC']]
-    })
-        .then(function(posts){
-        res.render('listaDiaria', {posts: posts})
-    })    
 })
 
 server.listen(8081, function() {
