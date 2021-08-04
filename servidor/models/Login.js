@@ -17,4 +17,4 @@ const Login = conexao.sequelize.define('login', {
 })
 
 module.exports = Login
-// Login.sync({force: true});
+ // Login.sync({force: true});

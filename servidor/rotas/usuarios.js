@@ -41,7 +41,7 @@ usuarios.get('/cadastrousuario', function(req, res) {
 
 // Listas listas de usuarios
 usuarios.get('/usuariolista', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0))
+    if(req.session.login === 0 || req.session.login == undefined)
     {
         mensagemLogin = 'Usuario não existe ou não autorizado';
         res.render('login_error', {msg: mensagemLogin});
@@ -74,6 +74,7 @@ usuarios.get('/listapresenca', function(req, res) {
 })
 
 usuarios.get('/deletar/:user', function(req, res) {        
+    if(req.session.login === 0 || req.session.login == undefined || (req.session.permissao > 0))
     Usuario.destroy({where: {'id' : req.params.user}}).then(function(){
         res.redirect('/usuarios/usuariolista');
     }).catch(function(erro){
