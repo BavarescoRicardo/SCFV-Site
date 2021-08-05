@@ -77,6 +77,10 @@ server.get('/sobre', function(req, res) {
     res.render('horario')
 })
 
+server.get('/mapa', function(req, res) {
+    res.render('mapa_Sala')
+})
+
 server.post('/logar', function(req, res) {
     Login.findOne({ 
         where: {
