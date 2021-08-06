@@ -13,4 +13,4 @@ const Escola = conexao.sequelize.define('escola', {
     }
 })
 
-Escola.sync({force: true});
+// Escola.sync({force: true});
