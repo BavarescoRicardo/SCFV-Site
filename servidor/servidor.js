@@ -33,11 +33,10 @@ server.use(express.static(path.join(__dirname, "public")))
 const bodyParser = require('body-parser');
 
 // Modelos
-const Usuario = require('./models/Usuario')
-const Escola = require('./models/Escola')
 const Login = require('./models/Login')
-const Contato = require('./models/Contato')
-const Diaria = require('./models/Diaria')
+const Mapa = require('./models/Mapa')
+const MapaUsuario = require('./models/MapaUsuario')
+
 
 // Vetor de indices ids auxiliares
 let inputValue = [];

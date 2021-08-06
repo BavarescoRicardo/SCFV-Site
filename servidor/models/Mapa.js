@@ -1,16 +1,16 @@
 const conexao = require('./conexao')
 
 // constantes para os modelos que devem virar tabelas
-const Escola = conexao.sequelize.define('escola', {
-    codigo: {
+const Mapa = conexao.sequelize.define('mapa', {
+    turma: {
         type: conexao.Sequelize.INTEGER
     },
-    nome: {
-        type: conexao.Sequelize.STRING
+    turno: {
+        type: conexao.Sequelize.INTEGER
     },
-    observacao: {
+    observacoes: {
         type: conexao.Sequelize.TEXT
     }
 })
 
-Escola.sync({force: true});
+// Mapa.sync({force: true});
