@@ -17,17 +17,32 @@
     </div> --}}
     <hr>
     <br/>
+    <form action="/listar_usuarios_mapas" method="POST">
 
-    <div class="row">
-        <h3>Horário das oficinas</h3>
-        <p>Turma:</p>        
-            <select id="Turma" name="cmbTurma">
-                <option value='1'>T1</option>
-                <option value='2'>T2</option>
-                <option value='3'>T3</option>
-                <option value='4'>T4</option>
-            </select>
-    </div>
+        <div class="row">        
+            <h3>Horário das oficinas</h3>
+            <p>Turma:</p>
+        </div>  
+        <div class="row">      
+            <div class="col-2">           
+                    <select id="Turma" name="cmbTurma">
+
+                        {{#each mapa}}
+                            <div class="row">
+                                <option value={{dataValues.id}}>{{dataValues.turma}}</option>
+                            <hr>
+                            </div>
+                        {{/each}}
+
+                    </select>
+                
+            </div>
+            <div class="col-2">
+                <button type="submit">Definir sala</button>
+            </div>
+        </div>
+        
+    </form>
 
     <table class="table table-bordered table-hover" id="tabelachamada">
         <thead>
@@ -47,32 +62,27 @@
         </thead>
         <tbody>
                 <tr>
-                    <td>Status</td>                                        
-                    <td>Status</td>                    
-                    <td>Status</td>                    
-                    <td>Status</td>                    
-                    <td>Status</td>                    
-                    <td>Status</td>                    
-                    <td>Status</td>                    
-                    <td>Status</td>                    
-                    <td>Status</td>                    
-                    <td>Status</td>                    
-                    <td>Status</td>                    
-                    <td>Status</td>                    
+                    <td>Usuário</td>                                        
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
                 </tr>        
                 <tr>
-                    <td>Usuários</td>                   
-                    <td>Usuários</td>                   
-                    <td>Usuários</td>                   
-                    <td>Usuários</td>                   
-                    <td>Usuários</td>                   
-                    <td>Usuários</td>                   
-                    <td>Usuários</td>                   
-                    <td>Usuários</td>                   
-                    <td>Usuários</td>                   
-                    <td>Usuários</td>                   
-                    <td>Usuários</td>                   
-                    <td>Usuários</td>                   
+
+                {{#each urss}}
+                <td>
+                    {{nome}}
+                </td>
+                {{/each}}
+
                 </tr>
         </tbody>
     </table>    

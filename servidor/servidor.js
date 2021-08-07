@@ -36,7 +36,7 @@ const bodyParser = require('body-parser');
 const Login = require('./models/Login')
 const Mapa = require('./models/Mapa')
 const MapaUsuario = require('./models/MapaUsuario')
-
+const Usuario = require('./models/Usuario')
 
 // Vetor de indices ids auxiliares
 let inputValue = [];
@@ -76,9 +76,6 @@ server.get('/sobre', function(req, res) {
     res.render('horario')
 })
 
-server.get('/mapa', function(req, res) {
-    res.render('mapa_Sala')
-})
 
 server.post('/logar', function(req, res) {
     Login.findOne({ 
@@ -124,4 +121,72 @@ server.get('/quiz', function(req, res) {
 
 server.listen(8081, function() {
     console.log('Aceeso em: http://localhost:8081');
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Selecionar mapas das salas
+server.get('/mapa', function(req, res) {
+    res.redirect('listamapas')
+})
+
+
+
+// Tela que lista todos os usuarios de certa turma para dar presença ou falta
+server.get('/listamapas', function(req, res) {
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
+    Mapa.findAll({order: [['turma', 'ASC']]}).then(function(posts){
+        res.render('mapa_Sala', {mapa: posts})
+    })    
+})
+
+
+// Selecionar os usuarios atribuidos aos computadores
+// Detalhar os usuarios que estavam presentes em uma chamada selecionada 
+server.post('/listar_usuarios_mapas', function(req, res) {    
+    // Declarar dos arrays de presencas e usuarios
+    let usersList = new Array();
+    let mapaList = new Array();
+    let usuario_mapaIds = new Array();
+    
+    // Localizar data e turma da presenca selecionada
+    Mapa.findOne({
+        where: {  id: req.body.cmbTurma },  raw : true 
+    }).then(function(map){            
+        mapaList.push(map)                
+
+    MapaUsuario.findAll({ 
+        attributes: ['cod_usuario'],
+        where: {
+            'cod_mapa' : req.body.cmbTurma
+        },  raw : true 
+    }).then(function(result_idUsuarios){
+        usuario_mapaIds = result_idUsuarios;
+
+        // Laço para selecionar cada usuario
+        for (let index = 0; index < usuario_mapaIds.length; index++) {
+            var myID = usuario_mapaIds[index].cod_usuario;            
+            console.log("id do aluno em questao  " + myID)
+            Usuario.findOne({
+                where: {  id: myID },  raw : true
+                }).then(function(postes){
+                    console.log("e o nome do aluno em questao  " + postes.nome)
+                    usersList.push(postes)
+                }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
+            }})
+        res.render('mapa_Sala', { mapas: mapaList,  urss: usersList } );        
+    })    
 })

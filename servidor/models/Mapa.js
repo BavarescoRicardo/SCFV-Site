@@ -14,3 +14,5 @@ const Mapa = conexao.sequelize.define('mapa', {
 })
 
 // Mapa.sync({force: true});
+
+module.exports = Mapa
