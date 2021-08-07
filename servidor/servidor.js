@@ -149,6 +149,7 @@ server.get('/mapa', function(req, res) {
 server.get('/listamapas', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     Mapa.findAll({order: [['turma', 'ASC']]}).then(function(posts){
+        // console('executado antes de carregar useuarios')
         res.render('mapa_Sala', {mapa: posts})
     })    
 })
@@ -164,7 +165,7 @@ server.post('/listar_usuarios_mapas', async function(req, res) {
     // Localizar data e turma da presenca selecionada
     Mapa.findOne({
         where: {  id: req.body.cmbTurma },  raw : true 
-    }).then(function(map){            
+    }).then(async function(map){            
 
         MapaUsuario.findAll({ 
             attributes: ['cod_usuario'],
@@ -175,18 +176,16 @@ server.post('/listar_usuarios_mapas', async function(req, res) {
             usuario_mapaIds = result_idUsuarios;
             // Laço para selecionar cada usuario
             try {
-                for  (const mp_user of usuario_mapaIds) {
+                for await(const mp_user of usuario_mapaIds) {
                     var myID = mp_user.cod_usuario;            
                     Usuario.findOne({
                         where: {  id: myID },  raw : true
-                        }).then(function(postes){
-                            console.log("e o nome do aluno em questao  " + postes.nome)
+                        }).then(async function(postes){
                             usersList.push(postes)
                         }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
                 }
             }
             finally {
-                console.log("ultima execucao lista users  " + usersList.length)
                 res.render('mapa_Sala', { urss: usersList })    
             }
             
