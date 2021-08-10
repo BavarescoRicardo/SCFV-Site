@@ -177,7 +177,7 @@ server.post('/listar_usuarios_mapas', function(req, res) {
 
     // Localizar data e turma da presenca selecionada
     Mapa.findOne({
-        where: {  id: req.body.cmbTurma },  raw : true 
+        where: {  turma: req.body.cmbTurma, turno: req.body.cmbTurno },  raw : true 
     }).then(function(map){            
 
         MapaUsuario.findAll({ 

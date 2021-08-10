@@ -3,18 +3,7 @@
 <br>
 <div class="container">
     <h3>Dividir cada usuario a cada computador de acordo com o mapa</h3>
-    {{!-- <br>
-    <div id="paginamapa">
-        <h3>Horário das oficinas</h3>
-        <p>Dia:</p>        
-            <select id="Dias" name="cmbDia">
-                <option value='1'>Segunda</option>
-                <option value='2'>Terça</option>
-                <option value='3'>Quarta</option>
-                <option value='4'>Quinta</option>
-                <option value='5'>Sexta</option>
-            </select>
-    </div> --}}
+
     <hr>
     <br/>
     <form action="/listar_usuarios_mapas" method="POST">
@@ -37,6 +26,20 @@
                     </select>
                 
             </div>
+
+            <div class="col-2">           
+                <select id="Turno" name="cmbTurno">
+
+                    {{#each mapa}}
+                        <div class="row">
+                            <option value={{dataValues.id}}>{{dataValues.turno}}</option>
+                        <hr>
+                        </div>
+                    {{/each}}
+
+                </select>                
+            </div>
+
             <div class="col-2">
                 <button type="submit">Definir sala</button>
             </div>
