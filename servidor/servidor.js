@@ -135,12 +135,32 @@ server.listen(8081, function() {
 
 
 
+// Trabalhando com promessas para obter o mapa da sala
+    // const promise = promessa_ListaMapas();
+    // const promise2 = promise.then(successCallback, failureCallback);
 
+// Declarar dos arrays de presencas e usuarios
+let usersList = new Array();
+let usuario_mapaIds = new Array();
 
 
 // Selecionar mapas das salas
+// var request = require('request'),
+//     username = "ricardo",
+//     password = "1234",
+//     url = "http://localhost:8081/mapa",
+//     auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
+
 server.get('/mapa', function(req, res) {
-    res.redirect('listamapas')
+    //             // Teste autenticação
+
+    //             var header = {'Host': '/mapa', 'Authorization': auth};
+    //             // o que é esse hearder?
+    //             console.log('hearder eh: ' +header.Authorization)
+    //             // o que vem no request?
+    //             console.log('request eh: ' +req.body.Authorization)
+    //  if(req.Authorization == header.Authorization) 
+     res.redirect('listamapas')
 })
 
 
@@ -157,15 +177,12 @@ server.get('/listamapas', function(req, res) {
 
 // Selecionar os usuarios atribuidos aos computadores
 // Detalhar os usuarios que estavam presentes em uma chamada selecionada 
-server.post('/listar_usuarios_mapas', async function(req, res) {    
-    // Declarar dos arrays de presencas e usuarios
-    let usersList = new Array();
-    let usuario_mapaIds = new Array();
-    
+server.post('/listar_usuarios_mapas', function(req, res) {    
+
     // Localizar data e turma da presenca selecionada
     Mapa.findOne({
         where: {  id: req.body.cmbTurma },  raw : true 
-    }).then(async function(map){            
+    }).then(function(map){            
 
         MapaUsuario.findAll({ 
             attributes: ['cod_usuario'],
@@ -174,21 +191,36 @@ server.post('/listar_usuarios_mapas', async function(req, res) {
             },  raw : true 
         }).then(async function(result_idUsuarios){
             usuario_mapaIds = result_idUsuarios;
-            // Laço para selecionar cada usuario
-            try {
-                for await(const mp_user of usuario_mapaIds) {
-                    var myID = mp_user.cod_usuario;            
-                    Usuario.findOne({
-                        where: {  id: myID },  raw : true
-                        }).then(async function(postes){
-                            usersList.push(postes)
-                        }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
-                }
-            }
-            finally {
-                res.render('mapa_Sala', { urss: usersList })    
-            }
             
+            // Chamar função promessa
+            await promessa_ListaMapas().then(function()
+            {
+                // Conferir se ja foram carregados os usuarios ou chamar novamente o metodo de carregar 
+                if(usersList.length < 10)promessa_ListaMapas() 
+                let resultados = usersList;
+                res.render('mapa_Sala', { urss: resultados }) 
+            })            
         })
     })
 })
+
+async function promessa_ListaMapas()
+{
+    let usuariosmapeados;
+    try{
+    // Laço para selecionar cada usuario    
+        for await (const mp_user of usuario_mapaIds) {
+            var myID = mp_user.cod_usuario;            
+            await Usuario.findOne({
+                where: {  id: myID },  raw : true
+                }).then(async function(postes){
+                    usersList.push(postes)
+                }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
+        }                
+    
+    }
+    finally
+    {
+        return usuariosmapeados;
+    }
+}
