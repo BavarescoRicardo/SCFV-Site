@@ -133,12 +133,6 @@ server.listen(8081, function() {
 
 
 
-
-
-// Trabalhando com promessas para obter o mapa da sala
-    // const promise = promessa_ListaMapas();
-    // const promise2 = promise.then(successCallback, failureCallback);
-
 // Declarar dos arrays de presencas e usuarios
 let usersList = new Array();
 let usuario_mapaIds = new Array();
@@ -178,6 +172,8 @@ server.get('/listamapas', function(req, res) {
 // Selecionar os usuarios atribuidos aos computadores
 // Detalhar os usuarios que estavam presentes em uma chamada selecionada 
 server.post('/listar_usuarios_mapas', function(req, res) {    
+    usersList = [];
+    // let usuario_mapaIds = [];
 
     // Localizar data e turma da presenca selecionada
     Mapa.findOne({
