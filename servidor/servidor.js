@@ -162,7 +162,12 @@ server.get('/mapa', function(req, res) {
 // Tela que lista todos os usuarios de certa turma para dar presença ou falta
 server.get('/listamapas', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
-    Mapa.findAll({order: [['turma', 'ASC']]}).then(function(posts){
+    Mapa.findAll(
+            {
+                group: ['turma'],
+                order: [['turma', 'ASC']]
+            }
+        ).then(function(posts){
         // console('executado antes de carregar useuarios')
         res.render('mapa_Sala', {mapa: posts})
     })    
