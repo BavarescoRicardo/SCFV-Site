@@ -78,8 +78,10 @@
                 <tr>
 
                 {{#each urss}}
-                <td>
-                    {{nome}}
+                <td>                    
+                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                        <option value={{id}}>{{nome}}</option>
+                    </select>  
                 </td>
                 {{/each}}
 
