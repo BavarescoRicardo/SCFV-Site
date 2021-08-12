@@ -18,12 +18,12 @@ server.use(flash())
 // Rotas
 const chamadas = require('./rotas/chamadas') 
 server.use('/chamada',chamadas)
-
 const usuarios = require('./rotas/usuarios') 
 server.use('/usuarios',usuarios)
-
 const diarios = require('./rotas/diarios') 
 server.use('/diarios',diarios)
+const mapas = require('./rotas/mapas') 
+server.use('/mapas',mapas)
 
 
 // constante caminho
@@ -122,106 +122,3 @@ server.get('/quiz', function(req, res) {
 server.listen(8081, function() {
     console.log('Aceeso em: http://localhost:8081');
 })
-
-
-
-
-
-
-
-
-
-
-
-// Declarar dos arrays de presencas e usuarios
-let usersList = new Array();
-let usuario_mapaIds = new Array();
-
-
-// Selecionar mapas das salas
-// var request = require('request'),
-//     username = "ricardo",
-//     password = "1234",
-//     url = "http://localhost:8081/mapa",
-//     auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
-
-server.get('/mapa', function(req, res) {
-    //             // Teste autenticação
-
-    //             var header = {'Host': '/mapa', 'Authorization': auth};
-    //             // o que é esse hearder?
-    //             console.log('hearder eh: ' +header.Authorization)
-    //             // o que vem no request?
-    //             console.log('request eh: ' +req.body.Authorization)
-    //  if(req.Authorization == header.Authorization) 
-     res.redirect('listamapas')
-})
-
-
-
-// Tela que lista todos os usuarios de certa turma para dar presença ou falta
-server.get('/listamapas', function(req, res) {
-    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
-    Mapa.findAll(
-            {
-                group: ['turma'],
-                order: [['turma', 'ASC']]
-            }
-        ).then(function(posts){
-        // console('executado antes de carregar useuarios')
-        res.render('mapa_Sala', {mapa: posts})
-    })    
-})
-
-
-// Selecionar os usuarios atribuidos aos computadores
-// Detalhar os usuarios que estavam presentes em uma chamada selecionada 
-server.post('/listar_usuarios_mapas', function(req, res) {    
-    usersList = [];
-    // let usuario_mapaIds = [];
-
-    // Localizar data e turma da presenca selecionada
-    Mapa.findOne({
-        where: {  turma: req.body.cmbTurma, turno: req.body.cmbTurno },  raw : true 
-    }).then(function(map){            
-
-        MapaUsuario.findAll({ 
-            attributes: ['cod_usuario'],
-            where: {
-                'cod_mapa' : map.id
-            },  raw : true 
-        }).then(async function(result_idUsuarios){
-            usuario_mapaIds = result_idUsuarios;
-            
-            // Chamar função promessa
-            await promessa_ListaMapas().then(function()
-            {
-                // Conferir se ja foram carregados os usuarios ou chamar novamente o metodo de carregar 
-                if(usersList.length < 10)promessa_ListaMapas() 
-                let resultados = usersList;
-                res.render('mapa_Sala', { urss: resultados }) 
-            })            
-        })
-    })
-})
-
-async function promessa_ListaMapas()
-{
-    let usuariosmapeados;
-    try{
-    // Laço para selecionar cada usuario    
-        for await (const mp_user of usuario_mapaIds) {
-            var myID = mp_user.cod_usuario;            
-            await Usuario.findOne({
-                where: {  id: myID },  raw : true
-                }).then(async function(postes){
-                    usersList.push(postes)
-                }).catch(function(erro){  console.log("Ocorreu um erro " + erro) })
-        }                
-    
-    }
-    finally
-    {
-        return usuariosmapeados;
-    }
-}

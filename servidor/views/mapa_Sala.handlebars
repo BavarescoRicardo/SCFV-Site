@@ -6,7 +6,7 @@
 
     <hr>
     <br/>
-    <form action="/listar_usuarios_mapas" method="POST">
+    <form action="/mapas/listar_usuarios_mapas" method="POST">
 
         <div class="row">        
             <h3>Horário das oficinas</h3>
@@ -34,11 +34,11 @@
                 </select>                
             </div>
 
-            <div class="col-2">
+            <div class="col-6">
                 <button type="submit">Definir sala</button>
             </div>
             <div class="col-2">
-                <a href="/listamapas"><button type="button">Editar este mapa</button></a>
+                <a href="/mapas/editar/"+{{idmapa}}><button type="button">Editar este mapa: {{idmapa}}</button></a>
             </div>
         </div>
         
