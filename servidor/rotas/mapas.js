@@ -98,4 +98,29 @@ async function promessa_ListaMapas()
 }
 
 
+// Editar mapa da sala
+mapas.get('/editar/:id', function(req, res) {
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
+        Mapa.findAll(
+            {
+                where: {  turma: req.params.id },  raw : true
+            }
+        ).then(function(posts){            
+            Usuario.findAll({
+                order: [['nome', 'ASC']],  raw : true
+            }).then(function(users){
+                // Verifica se o vetor esta carregado
+                if(users.length > 10) 
+                {                    
+                    console.log("tamanho da lista de mapas " + posts.length);
+                    console.log("lista de usuarios:  " + users.length);
+                    res.render('mapa_Sala_editar', {mapa: posts, usuar: users});
+                }
+            })
+        
+    })    
+})
+
+
+
 module.exports = mapas
