@@ -101,7 +101,7 @@ async function promessa_ListaMapas()
 // Editar mapa da sala
 mapas.get('/editar/:id', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
-        Mapa.findAll(
+        Mapa.findOne(
             {
                 where: {  turma: req.params.id },  raw : true
             }
@@ -119,6 +119,29 @@ mapas.get('/editar/:id', function(req, res) {
             })
         
     })    
+})
+
+
+// Editar mapa
+mapas.post('/confirmar_editacao', function(req, res) {             
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
+    try {
+        // Laço de usuarios ?
+        MapaUsuario.update(
+        { 
+            cod_mapa: req.body.cmbTurno,
+            cod_usuario: req.body.turma,
+            cod_maquina: req.body.turma
+        },
+        { where: { id: req.body.mapaid } }
+        )
+        .then(result =>
+            res.render('mapa_Sala')
+        )
+    } finally 
+    {
+        console.log('log conse no finalmente')
+    }
 })
 
 

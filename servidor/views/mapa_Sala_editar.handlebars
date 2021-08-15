@@ -2,149 +2,151 @@
 
 <br>
 <div class="container">
-    <h3>Editar os  usuarios de cada computador de acordo com o mapa</h3>
+    <input  type="hidden"  name="mapaid" id="mapaid" value={{mapa.id}}>
+    <form action="/mapas/confirmar_editacao/" method="POST">
 
-    <hr>
-    <br/>
-    <div class="row">        
-        <h3>Horário das oficinas</h3>
-        <p>Turma:</p>
-    </div>  
+        <hr>
+        <br/>
+        <div class="row">        
+            <h3>Horário das oficinas</h3>
+            <p>Turma:</p>
+        </div>  
 
-    <table class="table table-bordered table-hover" id="tabelachamada">
-        <thead>
-            <caption>Computadores</caption>
-            <th>PC01</th>
-            <th>PC02</th>
-            <th>PC03</th>
-            <th>PC04</th>
-            <th>PC05</th>
-            <th>PC06</th>
-            <th>PC07</th>
-            <th>PC08</th>
-            <th>PC09</th>
-            <th>PC10</th>
-            <th>PC11</th>
-            <th>PC12</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Usuário</td>                                        
-                <td>Usuário</td>                    
-                <td>Usuário</td>                    
-                <td>Usuário</td>                    
-                <td>Usuário</td>                    
-                <td>Usuário</td>                    
-                <td>Usuário</td>                    
-                <td>Usuário</td>                    
-                <td>Usuário</td>                    
-                <td>Usuário</td>                    
-                <td>Usuário</td>                    
-                <td>Usuário</td>                    
-            </tr>        
-            <tr>
-                <td>                    
-                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
-                        {{#each usuar}}                                    
-                            <option value={{id}}>{{nome}}</option>
-                        {{/each}}
-                    </select>                      
-                </td>
+        <table class="table table-bordered table-hover" id="tabelachamada">
+            <thead>
+                <caption>Computadores</caption>
+                <th>PC01</th>
+                <th>PC02</th>
+                <th>PC03</th>
+                <th>PC04</th>
+                <th>PC05</th>
+                <th>PC06</th>
+                <th>PC07</th>
+                <th>PC08</th>
+                <th>PC09</th>
+                <th>PC10</th>
+                <th>PC11</th>
+                <th>PC12</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Usuário</td>                                        
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                    <td>Usuário</td>                    
+                </tr>        
+                <tr>
+                    <td>                    
+                        <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                            {{#each usuar}}                                    
+                                <option value={{id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>                      
+                    </td>
 
-                <td>                    
-                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
-                        {{#each usuar}}                                    
-                            <option value={{id}}>{{nome}}</option>
-                        {{/each}}
-                    </select>                      
-                </td>
+                    <td>                    
+                        <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                            {{#each usuar}}                                    
+                                <option value={{id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>                      
+                    </td>
 
-                <td>                    
-                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
-                        {{#each usuar}}                                    
-                            <option value={{id}}>{{nome}}</option>
-                        {{/each}}
-                    </select>                      
-                </td>
+                    <td>                    
+                        <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                            {{#each usuar}}                                    
+                                <option value={{id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>                      
+                    </td>
 
-                <td>                    
-                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
-                        {{#each usuar}}                                    
-                            <option value={{id}}>{{nome}}</option>
-                        {{/each}}
-                    </select>                      
-                </td>
+                    <td>                    
+                        <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                            {{#each usuar}}                                    
+                                <option value={{id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>                      
+                    </td>
 
-                <td>                    
-                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
-                        {{#each usuar}}                                    
-                            <option value={{id}}>{{nome}}</option>
-                        {{/each}}
-                    </select>                      
-                </td>
+                    <td>                    
+                        <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                            {{#each usuar}}                                    
+                                <option value={{id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>                      
+                    </td>
 
-                <td>                    
-                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
-                        {{#each usuar}}                                    
-                            <option value={{id}}>{{nome}}</option>
-                        {{/each}}
-                    </select>                      
-                </td>
+                    <td>                    
+                        <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                            {{#each usuar}}                                    
+                                <option value={{id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>                      
+                    </td>
 
-                <td>                    
-                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
-                        {{#each usuar}}                                    
-                            <option value={{id}}>{{nome}}</option>
-                        {{/each}}
-                    </select>                      
-                </td>
+                    <td>                    
+                        <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                            {{#each usuar}}                                    
+                                <option value={{id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>                      
+                    </td>
 
-                <td>                    
-                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
-                        {{#each usuar}}                                    
-                            <option value={{id}}>{{nome}}</option>
-                        {{/each}}
-                    </select>                      
-                </td>
+                    <td>                    
+                        <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                            {{#each usuar}}                                    
+                                <option value={{id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>                      
+                    </td>
 
-                <td>                    
-                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
-                        {{#each usuar}}                                    
-                            <option value={{id}}>{{nome}}</option>
-                        {{/each}}
-                    </select>                      
-                </td>
+                    <td>                    
+                        <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                            {{#each usuar}}                                    
+                                <option value={{id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>                      
+                    </td>
 
-                <td>                    
-                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
-                        {{#each usuar}}                                    
-                            <option value={{id}}>{{nome}}</option>
-                        {{/each}}
-                    </select>                      
-                </td>
+                    <td>                    
+                        <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                            {{#each usuar}}                                    
+                                <option value={{id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>                      
+                    </td>
 
-                <td>                    
-                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
-                        {{#each usuar}}                                    
-                            <option value={{id}}>{{nome}}</option>
-                        {{/each}}
-                    </select>                      
-                </td>
+                    <td>                    
+                        <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                            {{#each usuar}}                                    
+                                <option value={{id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>                      
+                    </td>
 
-                <td>                    
-                    <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
-                        {{#each usuar}}                                    
-                            <option value={{id}}>{{nome}}</option>
-                        {{/each}}
-                    </select>                      
-                </td>
+                    <td>                    
+                        <select style="width: 105px; font-size: 14px;" id="Turno" name="cmbTurno">
+                            {{#each usuar}}                                    
+                                <option value={{id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>                      
+                    </td>
 
-            </tr>
-        </tbody>
-    </table>        
-    <div style="float:right; margin-right: 3%;">    
-        <a href="/mapas/confirmar_editacao/{{idmapa}}"><button type="button">Confirmar mapa: {{idmapa}}</button></a>
-    </div>
+                </tr>
+            </tbody>
+        </table>        
+        <div style="float:right; margin-right: 3%;">    
+            <button type="submit">Confirmar mapa: {{mapa.id}}</button></a>
+        </div>
+    </form>
     <br>
     <br>
     
