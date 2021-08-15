@@ -30,12 +30,12 @@ mapas.get('/mapa', function(req, res) {
 
 
 
-// Tela que lista todos os usuarios de certa turma para dar presença ou falta
+// Tela que lista todos os mapas
 mapas.get('/listamapas', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     Mapa.findAll(
             {
-                group: ['turma'],
+                group: ['id', 'turma'],
                 order: [['turma', 'ASC']]
             }
         ).then(function(posts){
