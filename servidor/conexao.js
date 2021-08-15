@@ -1,9 +1,9 @@
     // Conexão com o banco
     const Sequelize = require('sequelize');
 
-    const sequelize = new Sequelize('scfv', 'root', 'admin', {
+    const sequelize = new Sequelize('scfv', 'postgres', 'admin', {
         host: "localhost",
-        dialect: "mysql"
+        dialect: "postgresql"
     })
     
 module.exports = {

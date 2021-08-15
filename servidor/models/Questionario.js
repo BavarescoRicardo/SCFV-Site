@@ -16,6 +16,6 @@ const Questionario = conexao.sequelize.define('questionario', {
     }
 })
 
-// Questionario.sync({force: true});
+ // Questionario.sync({force: true});
 
 module.exports = Questionario

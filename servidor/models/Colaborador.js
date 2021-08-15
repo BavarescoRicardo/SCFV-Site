@@ -1,4 +1,4 @@
-const conexao = require('.../conexao')
+const conexao = require('../conexao')
 
 // constantes para os modelos que devem virar tabelas
 const Colaborador = conexao.sequelize.define('colaboradore', {
@@ -18,3 +18,4 @@ const Colaborador = conexao.sequelize.define('colaboradore', {
         type: conexao.Sequelize.STRING
     }
 })
+// Colaborador.sync({force: true});

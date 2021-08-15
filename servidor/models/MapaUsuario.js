@@ -13,5 +13,5 @@ const MapaUsuario = conexao.sequelize.define('mapausuario', {
     }
 })
 
-// MapaUsuario.sync({force: true});
+ // MapaUsuario.sync({force: true});
 module.exports = MapaUsuario

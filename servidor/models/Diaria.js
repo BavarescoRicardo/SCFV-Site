@@ -25,5 +25,5 @@ const Diaria = conexao.sequelize.define('diaria', {
     }
 })
 
-
+// Diaria.sync({force: true});
 module.exports = Diaria

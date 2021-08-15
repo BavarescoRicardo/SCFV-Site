@@ -13,6 +13,6 @@ const Contato = conexao.sequelize.define('contato', {
     }
 })
 
-// Contato.sync({force: true});
+ // Contato.sync({force: true});
 
 module.exports = Contato

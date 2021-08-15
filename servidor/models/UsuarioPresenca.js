@@ -10,6 +10,6 @@ const UsuarioPresenca = conexao.sequelize.define('usuarioPresenca', {
     }
 })
 
- // UsuarioPresenca.sync({force: true});
+//  UsuarioPresenca.sync({force: true});
 
 module.exports = UsuarioPresenca
