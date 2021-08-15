@@ -107,6 +107,7 @@ mapas.get('/editar/:id', function(req, res) {
             }
         ).then(function(posts){            
             Usuario.findAll({
+                where: {  turma: req.params.id },
                 order: [['nome', 'ASC']],  raw : true
             }).then(function(users){
                 // Verifica se o vetor esta carregado
@@ -123,23 +124,21 @@ mapas.get('/editar/:id', function(req, res) {
 
 
 // Editar mapa
-mapas.post('/confirmar_editacao', function(req, res) {             
+mapas.post('/confirmar_editacao/:mapa', async function(req, res) {             
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     try {
         // Laço de usuarios ?
-        MapaUsuario.update(
-        { 
-            cod_mapa: req.body.cmbTurno,
-            cod_usuario: req.body.turma,
-            cod_maquina: req.body.turma
-        },
-        { where: { id: req.body.mapaid } }
-        )
+        await MapaUsuario.update({ cod_usuario: req.body.cmbUsuarioPc1 }, {
+            where: {
+                cod_mapa: req.params.mapa
+            }
+          })        
         .then(result =>
             res.render('mapa_Sala')
         )
     } finally 
     {
+        console.log('numero do mapa salvo na pagina  ' + req.body.mapaid+ ' codigo do usuario selecionado ' + req.body.cmbUsuarioPc1)
         console.log('log conse no finalmente')
     }
 })
