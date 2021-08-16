@@ -124,7 +124,7 @@ mapas.post('/confirmar_editacao/:mapa', async function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     try {
         // Laço de usuarios ?
-        for (cont = 1; cont < 13; cont++){
+        for (cont = 0; cont < 12; cont++){
             await MapaUsuario.update({ cod_usuario: req.body.cmbUsuarioPc[cont] }, {
                 where: {
                     cod_mapa: req.params.mapa,
