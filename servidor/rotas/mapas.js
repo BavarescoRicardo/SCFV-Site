@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mapas = express.Router();
 
 // body-parser para pegar os inputs de um formulario do tipo post    
-mapas.use(bodyParser.urlencoded({extended: false}))
+mapas.use(bodyParser.urlencoded({extended: true}))
 mapas.use(bodyParser.json())
 
 // Modelos
@@ -12,11 +12,6 @@ const Usuario = require('../models/Usuario')
 const Escola = require('../models/Escola')
 const Mapa = require('../models/Mapa')
 const MapaUsuario = require('../models/MapaUsuario')
-
-
-
-
-
 
 // Declarar dos arrays de presencas e usuarios
 let usersList = new Array();
@@ -60,7 +55,8 @@ mapas.post('/listar_usuarios_mapas', function(req, res) {
             attributes: ['cod_usuario'],
             where: {
                 'cod_mapa' : map.id
-            },  raw : true 
+            },
+            order: [['cod_maquina', 'ASC']], raw : true 
         }).then(async function(result_idUsuarios){
             usuario_mapaIds = result_idUsuarios;
             
@@ -128,18 +124,20 @@ mapas.post('/confirmar_editacao/:mapa', async function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
     try {
         // Laço de usuarios ?
-        await MapaUsuario.update({ cod_usuario: req.body.cmbUsuarioPc1 }, {
-            where: {
-                cod_mapa: req.params.mapa
-            }
-          })        
-        .then(result =>
-            res.render('mapa_Sala')
-        )
+        for (cont = 1; cont < 13; cont++){
+            await MapaUsuario.update({ cod_usuario: req.body.cmbUsuarioPc[cont] }, {
+                where: {
+                    cod_mapa: req.params.mapa,
+                    cod_maquina: cont
+                }
+            })        
+        }
     } finally 
     {
-        console.log('numero do mapa salvo na pagina  ' + req.body.mapaid+ ' codigo do usuario selecionado ' + req.body.cmbUsuarioPc1)
-        console.log('log conse no finalmente')
+        console.log('exibe toda a pagina html abaixo: ')
+        console.log(req.body)
+        // console.log('numero do mapa salvo na pagina  ' + req.body.mapaid+ ' codigo do usuario selecionado ' + req.body.cmbUsuarioPc1)
+        res.render('mapa_Sala')
     }
 })
 
