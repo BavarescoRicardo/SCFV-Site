@@ -15,7 +15,7 @@ const Escola = require('../models/Escola')
 diarios.get('/diariocnteudo', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined || (!req.session.permissao > 0))
     {
-        res.render('login_error', {msg: mensagemLogin});
+        res.render('login_error', {msg: "Sem permissão de acesso"});
     }             
     res.render('diaria')
 })

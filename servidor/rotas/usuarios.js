@@ -75,11 +75,11 @@ usuarios.get('/listapresenca', function(req, res) {
 
 usuarios.get('/deletar/:user', function(req, res) {        
     if(req.session.login === 0 || req.session.login == undefined || (req.session.permissao > 0))
-    Usuario.destroy({where: {'id' : req.params.user}}).then(function(){
-        res.redirect('/usuarios/usuariolista');
-    }).catch(function(erro){
-        console.log("Item nao encontrado " +req.params.user + " " + erro)
+        Usuario.destroy({where: {'id' : req.params.user}}).then(function(){
+            res.redirect('/usuarios/usuariolista');
+        }).catch(function(erro){
+            console.log("Item nao encontrado " +req.params.user + " " + erro)
+        })
     })
-})
 
 module.exports = usuarios
