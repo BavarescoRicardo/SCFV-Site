@@ -26,6 +26,11 @@ const mapas = require('./rotas/mapas')
 server.use('/mapas',mapas)
 
 
+// Segurança de sistemas
+const seguranca = require('./rotas/rota_seguranca') 
+server.use('/rota_seguranca',seguranca)
+
+
 // constante caminho
 const path = require("path")
 server.use(express.static(path.join(__dirname, "public"))) 
