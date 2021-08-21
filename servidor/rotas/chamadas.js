@@ -63,7 +63,7 @@ rotas.get('/lista_chamada_gravadas', function(req, res) {
             'oficina',
             'turma',
             'turno',
-            [Presenca.sequelize.fn('date_format', Presenca.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
+            'dia'
         ],
         order: [['dia', 'DESC'], ['turno', 'ASC']]
     })
@@ -85,7 +85,8 @@ rotas.post('/filtra_chamada_gravadas', function(req, res) {
             'oficina',
             'turma',
             'turno',
-            [Presenca.sequelize.fn('date_format', Presenca.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
+            'dia'
+//            [Presenca.sequelize.fn('date_format', Presenca.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
         ],
         where: {
             turma: req.body.cmbTurma,

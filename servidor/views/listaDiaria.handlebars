@@ -41,7 +41,7 @@
 
     {{#each posts}}
         <div class="row">
-            <h4>Dia: {{dataValues.dia_formed}}  Conteudo: {{dataValues.conteudo}}</h4>
+            <h4>Dia: {{dataValues.dia}}  Conteudo: {{dataValues.conteudo}}</h4>
             <h5>Turno: {{dataValues.turno}} Turma: {{dataValues.turma}}</h5>                       
                             <!-- Botão ativa modal -->
                 <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -53,7 +53,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detalhes do Conteudo do dia {{dataValues.dia_formed}}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Detalhes do Conteudo do dia {{dataValues.dia}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

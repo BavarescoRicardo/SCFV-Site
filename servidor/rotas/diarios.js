@@ -49,7 +49,8 @@ diarios.get('/listardiario', function(req, res) {
             'turma',
             'turno',
             'observacao',
-            [Diaria.sequelize.fn('date_format', Diaria.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
+            'dia'
+//            [Diaria.sequelize.fn('date_format', Diaria.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
         ],
         order: [['dia', 'DESC'], ['turno', 'ASC']]
     })
@@ -68,7 +69,8 @@ diarios.post('/listardiario_filtro', function(req, res) {
             'turma',
             'turno',
             'observacao',
-            [Diaria.sequelize.fn('date_format', Diaria.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
+            'dia'
+//            [Diaria.sequelize.fn('date_format', Diaria.sequelize.col('dia'), '%d/%m/%Y'), 'dia_formed']
         ],        
         where: {
             turma: req.body.cmbTurma,
