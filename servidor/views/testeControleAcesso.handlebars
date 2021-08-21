@@ -1,33 +1,24 @@
 
 <div class="container">
-    <h2>Questionarios</h2>
-    <form  action="/diarios/novodiario" method="POST">       
+    <h2>Tela Controle de acesso furado</h2>
         <div class="row">
             <div class="col-3">
                 <p>Dia da oficina</p>                    
                 <input id="date" type="date" name="diaoficina"/>
             </div>    
             <div class="col-3">
-                <p>Oficina:</p>
+                <p>Dar permissão:</p>
                 <select id="oficina" name="cmbOficina">
-                    <option value='1'>Informatica</option>
-                    <option value='2'>Esporte</option>
-                    <option value='3'>Meio Ambiente</option>
-                    <option value='4'>Artesanato</option>
-                    <option value='5'>Capoeira</option>
+                    <option value='1'>Sim</option>
+                    <option value='2'>Não</option>
                 </select>
             </div>
         </div>
     <br>
     <div class="row">
         <div class="col-3">
-            <p>Turma:</p>        
-            <select id="Turma" name="cmbTurma">
-                <option value='1'>1</option>
-                <option value='2'>2</option>
-                <option value='3'>3</option>
-                <option value='4'>4</option>
-            </select>
+            <p>Usuario logado:</p>        
+
         </div>
         <div class="col-3">
             <p>Turno</p>      
@@ -39,22 +30,17 @@
     </div>
         <br>
     <div class="row">
-        <div class="col-11">
-            <label for="fname">Questão</label>
-            <textarea class="form-control" id="fname" name="conteudo" rows="3"></textarea>
+        <div class="col-11">            
+            <h2>Acesso somente para usuarios com permissão de administrador ! </h2>
         </div>
 
     </div>        
     <br>
     <div class="container">
         <div class="row">
-            <div class="col-4">
-                <button type="submit">Nova questão</button>
-            </div>
             <div class="col-2">
                 <a href="/diarios/listardiario"><button type="button">Listar questionarios</button>
             </div>
         </div>
     </div>
-    </form>
 </div>

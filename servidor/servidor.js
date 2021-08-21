@@ -72,10 +72,6 @@ server.get('/', function(req, res) {
     res.render('login')
 })
 
-        // server.get('/usuarios', function(req, res) {
-        //     res.sendFile(__dirname + "/arquivos/index.html");
-        // //    res.send('<h1>Requisição get  - usuarios  -  Certo</h1>');
-        // })
 
 server.get('/sobre', function(req, res) {
     res.render('horario')
@@ -126,4 +122,17 @@ server.get('/quiz', function(req, res) {
 
 server.listen(8081, function() {
     console.log('Aceeso em: http://localhost:8081');
+})
+
+
+
+
+// Trabalho Segurança de Sistemas
+// Marcos e Ricardo
+server.get('/ControleAcesso', function(req, res) {
+    // Verifica se o usuario esta logado no sistema
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
+
+    // Autoriza qualquer usuario a visualizar a página sem verificar a permissão
+    res.render('testeControleAcesso')
 })
