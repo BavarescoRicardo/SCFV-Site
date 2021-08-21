@@ -43,8 +43,8 @@ usuarios.get('/cadastrousuario', function(req, res) {
 usuarios.get('/usuariolista', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined)
     {
-        mensagemLogin = 'Usuario não existe ou não autorizado';
-        res.render('login_error', {msg: mensagemLogin});
+//        'msg Sem permissão' = 'Usuario não existe ou não autorizado';
+        res.render('login_error', {msg: 'Sem permissão'});
     } 
     Usuario.findAll({order: [['nome', 'ASC']]}).then(function(posts){
         res.render('listausuarios', {posts: posts})

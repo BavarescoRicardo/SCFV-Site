@@ -53,7 +53,7 @@ server.use(cors());
 
 
 // Array de mensagens após login com erros ou usuario logado
-let mensagemLogin = [];
+// let Sem permissão = [];
 
 
 // Configurar
@@ -95,13 +95,13 @@ server.post('/logar', function(req, res) {
         req.session.permissao = logdao.permissao;
 
         // Definir usuario e mensagem de login
-        mensagemLogin =  req.body.user + "  :Nivel: " + logdao.permissao;
+//        'msg Sem permissão' =  req.body.user + "  :Nivel: " + logdao.permissao;
 
         res.redirect('/usuarios/usuariolista');
     }).catch(function(erro){
         req.session.login = null;
-        mensagemLogin = "Usuario não encontrado";
-        res.render('login_error', {msg: mensagemLogin});
+//        'msg Sem permissão' = "Usuario não encontrado";
+        res.render('login_error', {msg: 'Sem permissão'});
     })
 })
 
