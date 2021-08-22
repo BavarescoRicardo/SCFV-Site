@@ -74,7 +74,7 @@ server.get('/', function(req, res) {
 
 
 server.get('/sobre', function(req, res) {
-    res.render('horario')
+    res.render('sobre')
 })
 
 
