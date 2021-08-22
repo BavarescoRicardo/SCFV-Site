@@ -72,12 +72,6 @@ server.get('/', function(req, res) {
     res.render('login')
 })
 
-
-server.get('/sobre', function(req, res) {
-    res.render('sobre')
-})
-
-
 server.post('/logar', function(req, res) {
     Login.findOne({ 
         where: {
@@ -129,10 +123,17 @@ server.listen(8081, function() {
 
 // Trabalho Segurança de Sistemas
 // Marcos e Ricardo
+
+
+server.get('/sobre', function(req, res) {
+
+    // Fazer controle no front end da exibição do link
+    res.render('sobre', {permit : req.session.permissao})
+})
+
 server.get('/ControleAcesso', function(req, res) {
     // Verifica se o usuario esta logado no sistema
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
-
     // Autoriza qualquer usuario a visualizar a página sem verificar a permissão
     res.render('testeControleAcesso')
 })

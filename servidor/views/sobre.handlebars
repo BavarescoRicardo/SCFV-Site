@@ -65,10 +65,12 @@
     <button style="width: 210px;" type="submit" onClick="printPage()">Imprimir a tabela acima</button>
 </div>
 
-<div style="float:right; margin-right: 5%;" id="controle">
-    <a href="/ControleAcesso" class="btn btn-dark">Garantia de controle de acesso no front</a>
-</div>
-
+Nivel de permissão: {{permit}}
+{{#if permit}}
+    <div style="float:right; margin-right: 5%;" id="controle">
+        <a href="/ControleAcesso" class="btn btn-dark">Garantia de controle de acesso no front.</a>
+    </div>
+{{/if}}
 
 <br/>
 <br/>
