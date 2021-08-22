@@ -123,8 +123,6 @@ server.listen(8081, function() {
 
 // Trabalho Segurança de Sistemas
 // Marcos e Ricardo
-
-
 server.get('/sobre', function(req, res) {
 
     // Fazer controle no front end da exibição do link
