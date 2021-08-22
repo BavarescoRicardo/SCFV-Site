@@ -18,7 +18,6 @@
     <br/>
     <table class="table table-bordered table-hover" id="tabelachamada">
         <thead>
-            <caption>Aulas</caption>
             <th>T1</th>
             <th>T2</th>
             <th>T3</th>
@@ -55,29 +54,48 @@
         </tbody>
     </table>    
     <br>
-    <br>
-    
+    <br>    
 </div>
-
-<div style="float:left; margin-left: 3%;">    
-    <a href= "/mapas/mapa"><button style="width: 210px;">Mapa da Sala</button></a>
-    <br/>
-    <button style="width: 210px;" type="submit" onClick="printPage()">Imprimir a tabela acima</button>
-</div>
-
-Nivel de permissão: {{permit}}
-{{#if permit}}
-    <div style="float:right; margin-right: 5%;" id="controle">
-        <a href="/ControleAcesso" class="btn btn-dark">Garantia de controle de acesso no front</a>
+<div class="row">
+    <div class="col-2">
+        <button style="width: 210px;" type="submit" onClick="printPage()">Imprimir a tabela acima</button>
     </div>
-{{/if}}
+    <div class="col-2">
+        <a href="/display"><button style="width: 210px;">Mostrar desenhos</button></a>        
+    </div>
+</div>
 
-<br/>
-<br/>
-<hr/>
-<div >    
-    <h3>Autoria e desenvolvimento</h3> 
-    <h4>Ricardo Bavaresco</h>
+
+<div class="row" style="margin-top: 10px;">
+    <div class="col-2">
+        <a href="/quiz"><button style="width: 210px;">Questionario</button></a>        
+    </div>
+    <div class="col-4">
+        <a href= "/mapas/mapa"><button style="width: 210px;">Mapa da Sala</button></a>        
+    </div>
+</div>    
+
+<div class="row" style="margin-top: 20px;">
+    <div class="col-2">
+        Nivel de permissão: {{permit}}
+    </div>
+    <div class="col-4">
+        {{#if permit}}
+            <div id="controle">
+                <a href="/ControleAcesso" class="btn btn-dark">Garantia de controle de acesso no front</a>
+            </div>
+        {{/if}}
+    </div>
+</div>
+
+
+
+<div class="row">
+    <hr/>   
+    <div class="col-4">
+        <h3>Autoria e desenvolvimento</h3> 
+        <h4>Ricardo Bavaresco</h>
+    </div>
 </div>
 
 

@@ -121,6 +121,17 @@ server.listen(8081, function() {
 
 
 
+// Rota paa exibir a pagina com desenhos
+server.get('/display', function(req, res) {
+    if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
+    res.render('display_imagens')
+})
+
+
+
+
+
+
 // Trabalho Segurança de Sistemas
 // Marcos e Ricardo
 server.get('/sobre', function(req, res) {
