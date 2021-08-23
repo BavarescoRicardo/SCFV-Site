@@ -123,7 +123,7 @@ server.listen(8081, function() {
 server.get('/display', function(req, res) {
     if(req.session.login === 0 || req.session.login == undefined) res.render('login_error');            
 
-    res.sendFile(__dirname + "/arquivos/display_imagens.html");
+    res.sendFile(__dirname + "/arquivos/paginas/display_imagens.html");
 })
 
 
