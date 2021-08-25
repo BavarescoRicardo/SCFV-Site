@@ -114,8 +114,8 @@ server.get('/quiz', function(req, res) {
     res.render('Questionario')
 })
 
-server.listen(8081, function() {
-    console.log('Aceeso em: http://localhost:8081');
+server.listen(3033, function() {
+    console.log('Aceeso em: http://localhost:3033');
 })
 
 
