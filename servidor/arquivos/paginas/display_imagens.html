@@ -2,45 +2,57 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="/css/bootstrap.min.css"/>        
-        <title>Exibir Sprites</title>
-        <script>
-
-            function desenha() {
-                var imagem = document.querySelector("img");
-                var canvas = document.getElementById('telaSprite');
-                var ctx = canvas.getContext('2d');
-                ctx.fillRect(25, 25, 100, 100);  
-                ctx.drawImage(
-                    imagem,100,100
-                )      
+        <link rel="stylesheet" href="/bootstrap.min.css"/>        
+        <title>Canvas tutorial</title>
+        <style>
+            canvas {
+                border: 1px;
             }
-        </script>
+        </style>
     </head>
     <body>
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1>Pagina para exibir os sprites criados pelos alunos</h1>
+                    <h1>Pagina para exibir Canvas</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col-10">
-                    <input type='file' name='img' size='65' id='uploadimage' />
+                <div class="col-10">                   
                     
-                    <canvas id="telaSprite" width="500px" height="500px">
+                    <canvas id="canvas" width="500px" height="500px">
                         Se texto aparece então o canvas deu errado.
                     </canvas>
-                    <script>desenha();</script>
+
+                    <script>
+                        var posX = 50, posY = 100;
+                        var cnv = document.querySelector('canvas');
+                        var ctx = cnv.getContext('2d');
+                        var img = new Image();
+                        img.src = "./desenhos/sprite_creeper0.png";
+                        desenha();
+
+                        function desenha(){
+                            ctx.clearRect(0, 0, cnv.width, cnv.height);
+                            ctx.drawImage(img, posX, posY);
+//                            ctx.fillRect(posX, posY, posX+100, posY+100);
+                        }
+
+                        function mover()
+                        {
+                            posX = posX+10;
+                            desenha();
+                        }
+                    </script>
                 </div>
             </div>
 
             <div class="row" style="margin-top: 10px;">
                 <div class="col-2">
-                    <button style="width: 150px;">-></button>
+                    <button style="width: 150px;" onclick=" mover();">-></button>
                 </div>
                 <div class="col-2">
-                    <button style="width: 150px;"> -></button>        
+                    <button style="width: 150px;" onclick=" mover();"> -></button>        
                 </div>
             </div> 
         </div>
