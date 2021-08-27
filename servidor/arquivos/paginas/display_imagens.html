@@ -25,17 +25,18 @@
                     </canvas>
 
                     <script>
+                        
                         var posX = 50, posY = 100;
                         var cnv = document.querySelector('canvas');
                         var ctx = cnv.getContext('2d');
-                        var img = new Image();
-                        img.src = "./desenhos/sprite_creeper0.png";
+//                        var img = new Image();
+//                        img.src = "./desenhos/sprite_creeper0.png";
                         desenha();
 
                         function desenha(){
                             ctx.clearRect(0, 0, cnv.width, cnv.height);
-                            ctx.drawImage(img, posX, posY);
-//                            ctx.fillRect(posX, posY, posX+100, posY+100);
+//                            ctx.drawImage(img, posX, posY);
+                            ctx.fillRect(posX, posY, posX+100, posY+100);
                         }
 
                         function mover()
