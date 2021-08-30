@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="/bootstrap.min.css"/>        
+        <link rel="stylesheet" href="/bootstrap.min.css"/>                
+        <script src="desenhos.js"></script>
         <title>Canvas tutorial</title>
         <style>
             canvas {
@@ -24,19 +25,19 @@
                         Se texto aparece então o canvas deu errado.
                     </canvas>
 
-                    <script>
+                    <!-- <script>
                         
                         var posX = 50, posY = 100;
                         var cnv = document.querySelector('canvas');
                         var ctx = cnv.getContext('2d');
-//                        var img = new Image();
-//                        img.src = "./desenhos/sprite_creeper0.png";
+                        var img = new Image();
+                        img.src = "https://flaviocopes.com/canvas-node-generate-image/Screenshot%202020-04-02%20at%2018.00.17.png";
                         desenha();
 
                         function desenha(){
                             ctx.clearRect(0, 0, cnv.width, cnv.height);
-//                            ctx.drawImage(img, posX, posY);
-                            ctx.fillRect(posX, posY, posX+100, posY+100);
+                            ctx.drawImage(img, posX, posY);
+//                            ctx.fillRect(posX, posY, posX+100, posY+100);
                         }
 
                         function mover()
@@ -44,16 +45,17 @@
                             posX = posX+10;
                             desenha();
                         }
-                    </script>
+                    </script> -->
+                    
                 </div>
             </div>
 
             <div class="row" style="margin-top: 10px;">
                 <div class="col-2">
-                    <button style="width: 150px;" onclick=" mover();">-></button>
+                    <button style="width: 150px;" onclick="mover();">-></button>
                 </div>
                 <div class="col-2">
-                    <button style="width: 150px;" onclick=" mover();"> -></button>        
+                    <button style="width: 150px;" onclick="mover();"> -></button>        
                 </div>
             </div> 
         </div>

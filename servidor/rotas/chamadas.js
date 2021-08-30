@@ -5,6 +5,9 @@ const Usuario = require('../models/Usuario')
 const bodyParser = require('body-parser');
 const rotas = express.Router();
 
+// chamada selecionada 
+var ult=0;
+
 // body-parser para pegar os inputs de um formulario do tipo post    
 rotas.use(bodyParser.urlencoded({extended: false}))
 rotas.use(bodyParser.json())
